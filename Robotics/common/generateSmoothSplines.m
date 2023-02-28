@@ -46,7 +46,7 @@ function [p,v,a,j,t,m] = generateSmoothSplines(qk, tk, w, mu)
     t = []; p = []; v = []; a = []; j = []; m = [1];
     for k = 1:n
         % Trajectory computation
-        dt = tk(1,k):0.001:tk(1,k+1);
+        dt = tk(1,k):0.01:tk(1,k+1);
         t = [t dt];
         q = @(dt) (s(1,k+1)/T(1,k)-T(1,k)*dds(1,k+1)/6)*(dt-tk(1,k)) + ...
             (s(1,k)/T(1,k)-T(1,k)*dds(1,k)/6)*(tk(1,k+1)-dt) + ...

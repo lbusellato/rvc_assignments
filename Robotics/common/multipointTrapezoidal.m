@@ -29,7 +29,11 @@ function [q,v,a,t,markers] = generateTrapezoidal(qks, dqi, dqf, vm, am, cb)
     % Iteratively construct the multipoint trajectory
     for k=1:sz-1
         [qk,vk,ak,tk] = generateTrapezoidal(tks(1,k),tks(1,k+1),qks(1,k),qks(1,k+1),nan,nan,nan,dqk(1,k),dqk(1,k+1),am,vm);
-        tks(1,k+1) = tk(size(tk, 2));
+        if size(tk, 2) ~= 0
+            tks(1,k+1) = tk(size(tk, 2)); 
+        else
+            tks(1,k+1) = tks(1,k);
+        end
         q = [q qk]; v = [v vk]; a = [a ak]; t = [t tk]; 
         markers = [markers size(t,2)];
     end

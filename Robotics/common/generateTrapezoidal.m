@@ -14,7 +14,10 @@
 function [q,v,a,t] = generateTrapezoidal(ti, tf, qi, qf, tc, vc, ac, dqi, dqf, am, vm)
     sgn = 1; argCheck = false; msg = ".";
     % Input args check
-    if ~isnan(vc) && ~isnan(ac) % Both dqc and ddqc fixed
+    if qf == qi
+        % Not much to do here...
+        ta = 0; td = 0; tc = 0; dqc = 0; ddqc = 0; dqi = 0; dqf = 0;
+    elseif ~isnan(vc) && ~isnan(ac) % Both dqc and ddqc fixed
         if ac ~= 0 && vc ~= 0
             ac = sign(qf-qi)*ac; vc = sign(qf-qi)*vc;  % Handle qf < qi case
             tc = vc / ac;
