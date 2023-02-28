@@ -2,6 +2,8 @@
 %
 %   assignment1.m: 3rd, 5th and 7th order polynomial trajectories.
 %
+%   Author: Lorenzo Busellato, VR472249, 2023
+%
 %--------------------------------------------------------------------------
 
 %% SETUP
