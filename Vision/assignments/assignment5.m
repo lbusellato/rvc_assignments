@@ -163,7 +163,7 @@ for i = 1:4
     for j = 1:4
         if j ~= i
             a = angleBetweenLines(linesM(:,i),linesM(:,j));
-            if a >= 85 && a <= 95
+            if a >= 80 && a <= 100
                 intersectingLines = [intersectingLines; i j];
             end
         end

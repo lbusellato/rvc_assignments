@@ -1,6 +1,6 @@
 %--------------------------------------------------------------------------
 %
-%   assignment2.m: Canonical orientation
+%   assignment3.m: Canonical orientation
 %
 %   Author: Lorenzo Busellato, VR472249, 2023
 %
@@ -16,8 +16,8 @@ addpath(genpath('../data/'))
 
 %% LOAD POINT CLOUD
 % Downsample to 10% of the original points
-ptCloud = pcread("data/assignment3/SamPointCloud.ply");
-ptCloud = pcdownsample(ptCloud, "random", 0.1);
+ptCloud = pcread("data/assignment3/dense_point_cloud.ply");
+ptCloud = pcdownsample(ptCloud, "random", 0.5);
 P = ptCloud.Location;
 
 %% EXTRINSIC CENTROID

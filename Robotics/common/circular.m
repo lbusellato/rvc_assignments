@@ -3,8 +3,8 @@
 %   circular.m
 %
 %   This script generates the position, velocity, acceleration and jerk
-%   profiles for a circular motion primitive with center c, radius r,
-%   starting from point P and parametrized wrt u.
+%   profiles for a circular motion primitive with center c, axis of 
+%   rotation r, starting from point P and parametrized wrt u.
 %
 %   Author: Lorenzo Busellato, VR472249, 2023
 %
