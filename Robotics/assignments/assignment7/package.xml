@@ -3,7 +3,7 @@
 <package format="3">
   <name>assignment7</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
+  <description>Robotics, Vision and Control @ UniVR, assignment 7</description>
   <maintainer email="lorenzo.busellato_02@studenti.univr.it">Lorenzo Busellato</maintainer>
   <license>BSD-3</license>
 

@@ -19,7 +19,7 @@ setup(
     zip_safe=True,
     maintainer='Lorenzo Busellato',
     maintainer_email='lorenzo.busellato_02@studenti.univr.it',
-    description='TODO: Package description',
+    description='Robotics, Vision and Control @ UniVR, assignment 7',
     license='BSD-3',
     tests_require=['pytest'],
     entry_points={

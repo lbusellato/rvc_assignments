@@ -6,6 +6,7 @@ def generate_launch_description():
     node = Node(
         package="assignment7",
         executable="main",
+        output="screen"
     )
     ld.add_action(node)
     return ld
