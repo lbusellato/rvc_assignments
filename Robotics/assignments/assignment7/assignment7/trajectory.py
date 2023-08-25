@@ -35,7 +35,7 @@ class Trajectory():
         direction_vector = direction_vector / radius
         q = np.zeros((u.shape[0], P.shape[0]))
         for i, theta in enumerate(u):
-            q[i,:] = C + radius * (np.cos(theta + np.pi/2) * direction_vector + np.sin(theta + np.pi/2) * np.cross(direction_vector, [0,1,0]))
+            q[i,:] = C + radius * (np.cos(theta + np.pi/2) * direction_vector + np.sin(theta + np.pi/2) * np.cross(direction_vector, [0,0,1]))
         return q
     
 if __name__ == '__main__':

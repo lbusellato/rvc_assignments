@@ -11,7 +11,7 @@ SCAN_START_OP = PoseStamped(pose=Pose(position=Point(x=-0.129, y=0.487, z=0.422)
 planner = Trajectory()
 
 def generate_scanning_task(initial_pose = SCAN_START_OP.pose,
-                            center = np.array([0,0.487,0]),
+                            center = np.array([0,0,0.422]),
                             displacement = 0.2,
                             rectilinear_dt = 0.5,
                             circular_dt = 1.5):

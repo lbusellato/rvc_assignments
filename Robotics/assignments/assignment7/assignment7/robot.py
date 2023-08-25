@@ -71,21 +71,28 @@ class Robot(Node):
         self.time = 0
         self.create_timer(timer_period_sec=self.dt, callback=self.control_loop)
         # State variables
+        self.homed = False
         self.reached_scan_start = False
         self.scanning_done = False
 
     def control_loop(self):
-        if not self.reached_scan_start:
-            self.reached_scan_start = self.moveL(self.pose_to_array(self.pose), self.pose_to_array(SCAN_START_OP.pose), self.time)
+        if not self.homed:
+            # Go home if not already there
+            self.homed = self.moveL(self.pose, HOME_OP.pose, self.time)
+            if self.homed: self.time = 0
+        elif not self.reached_scan_start:
+            # Go to the starting scanning position
+            self.reached_scan_start = self.moveL(self.pose, SCAN_START_OP.pose, self.time)
             if self.reached_scan_start: self.time = 0
+        elif not self.scanning_done:
+            new_position, self.scanning_traj = self.pop(self.scanning_traj)
+            if new_position is None:
+                self.scanning_done = True
+            else:
+                new_pose = PoseStamped(pose=Pose(position=Point(x=new_position[0],y=new_position[1],z=new_position[2]),orientation=scan_orientation))
+                self.moveTo(new_pose)
         else:
-            if not self.scanning_done:
-                new_position, self.scanning_traj = self.pop(self.scanning_traj)
-                if new_position is None:
-                    self.scanning_done = True
-                else:
-                    new_pose = PoseStamped(pose=Pose(position=Point(x=new_position[0],y=new_position[1],z=new_position[2]),orientation=scan_orientation))
-                    self.reached_scan_start = self.moveTo(new_pose)
+            pass
 
     #-------------------------------------------------------------------------------------------------------------------
     #
@@ -95,11 +102,12 @@ class Robot(Node):
 
     def moveTo(self, target_pose):
         self.op_target_pub_.publish(target_pose)
-        return np.allclose(self.pose_to_array(self.pose), self.pose_to_array(target_pose.pose), rtol=0.1)
 
     def moveL(self, start_pose, target_pose, t):
         if self.pose is None:
             return False
+        start_pose = self.pose_to_array(start_pose)
+        target_pose = self.pose_to_array(target_pose)
         # Move to a target pose by linearly interpolating from the current one.
         command_position = (1 - t) * start_pose[:3] + t * target_pose[:3]
         # SLERP on the quaternions
@@ -111,7 +119,7 @@ class Robot(Node):
         self.op_target_pub_.publish(command_pose)
         # We did something, update the time
         self.time += self.dt
-        return np.allclose(self.pose_to_array(self.pose), target_pose, rtol=0.1)
+        return np.allclose(self.pose_to_array(self.pose), target_pose, rtol=0.01)
 
     #-------------------------------------------------------------------------------------------------------------------
     #
@@ -121,7 +129,7 @@ class Robot(Node):
 
     def generate_scanning_task(self, 
                                initial_pose = SCAN_START_OP.pose,
-                               center = np.array([0,0.487,0]),
+                               center = np.array([0,0, 0.422]),
                                displacement = 0.2,
                                rectilinear_dt = 0.5,
                                circular_dt = 1.5):
@@ -238,10 +246,3 @@ class Robot(Node):
         if arr.shape[0] == 1:
             return arr[0,:], None
         return arr[0,:], arr[1:,:]
-    
-    def quaternion_to_XYZ(self, quaternion : Quaternion):
-        x, y, z, w = quaternion.x, quaternion.y, quaternion.z, quaternion.w
-        phi = np.arctan2(2*(x*y + z*w), w**2 - x**2 - y**2 + z**2)
-        theta = np.arcsin(2*(y*w-x*z))
-        xi = np.arctan2(2 * (x * w + y * z), w**2 + x**2 - y**2 - z**2)
-        return phi, theta, xi
