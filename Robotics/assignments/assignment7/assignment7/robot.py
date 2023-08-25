@@ -80,12 +80,12 @@ class Robot(Node):
             if self.reached_scan_start: self.time = 0
         else:
             if not self.scanning_done:
-                self.scanning_traj, new_position = self.pop(self.scanning_traj)
+                new_position, self.scanning_traj = self.pop(self.scanning_traj)
                 if new_position is None:
                     self.scanning_done = True
                 else:
                     new_pose = PoseStamped(pose=Pose(position=Point(x=new_position[0],y=new_position[1],z=new_position[2]),orientation=scan_orientation))
-                    self.scanning_done = self.moveTo(new_pose)
+                    self.reached_scan_start = self.moveTo(new_pose)
 
     #-------------------------------------------------------------------------------------------------------------------
     #
@@ -121,7 +121,7 @@ class Robot(Node):
 
     def generate_scanning_task(self, 
                                initial_pose = SCAN_START_OP.pose,
-                               center = np.array([0,0.128,0]),
+                               center = np.array([0,0.487,0]),
                                displacement = 0.2,
                                rectilinear_dt = 0.5,
                                circular_dt = 1.5):
@@ -207,7 +207,7 @@ class Robot(Node):
                         pose.orientation.x, 
                         pose.orientation.y, 
                         pose.orientation.z, 
-                        pose.orientation.w])
+                        pose.orientation.w]) if pose is not None else None
     
     def normalize(self, array):
         return array / np.linalg.norm(array)
@@ -238,3 +238,10 @@ class Robot(Node):
         if arr.shape[0] == 1:
             return arr[0,:], None
         return arr[0,:], arr[1:,:]
+    
+    def quaternion_to_XYZ(self, quaternion : Quaternion):
+        x, y, z, w = quaternion.x, quaternion.y, quaternion.z, quaternion.w
+        phi = np.arctan2(2*(x*y + z*w), w**2 - x**2 - y**2 + z**2)
+        theta = np.arcsin(2*(y*w-x*z))
+        xi = np.arctan2(2 * (x * w + y * z), w**2 + x**2 - y**2 - z**2)
+        return phi, theta, xi
