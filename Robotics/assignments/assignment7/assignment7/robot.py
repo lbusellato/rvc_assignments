@@ -1,4 +1,5 @@
 import copy
+import math
 import numpy as np
 
 from rclpy.node import Node
@@ -25,9 +26,15 @@ class Robot(Node):
                             self.YELLOW : 'yellow'}
 
         # Some known waypoints
+        self.HOME = PoseStamped(pose=Pose(position=Point(x=0.484, y=0.128, z=0.609), orientation=Quaternion(x=0.5, y=0.5, z=0.5, w=0.5)))
+        self.SCAN_START = PoseStamped(pose=Pose(position=Point(x=-0.129, y=0.487, z=0.422), orientation=Quaternion(x=0.00179, y=0.99999, z=0.00035, w=-0.00116)))
 
-        self.HOME_OP = PoseStamped(pose=Pose(position=Point(x=0.484, y=0.128, z=0.609), orientation=Quaternion(x=0.5, y=0.5, z=0.5, w=0.5)))
-        self.SCAN_START_OP = PoseStamped(pose=Pose(position=Point(x=-0.129, y=0.487, z=0.422), orientation=Quaternion(x=0.00179, y=0.99999, z=0.00035, w=-0.00116)))
+        # Different orientations for pick and place
+        VER_1 = Quaternion(x=np.sqrt(2)/2,y=np.sqrt(2)/2,z=0.0,w=0.0)
+        VER_2 = Quaternion(x=0.0,y=0.0,z=0.0,w=1.0)
+        HOR_1 = Quaternion(x=0.5,y=-0.5,z=0.5,w=0.5)
+        HOR_2 = Quaternion(x=np.sqrt(3)/2,y=0.0,z=0.0,w=0.5)
+        self.pnp_orientations = [VER_1, VER_2, HOR_1, VER_2, VER_2, HOR_2, HOR_2, HOR_1]
 
         self.cube_locations = {self.RED    : None,
                                self.GREEN  : None,
@@ -56,31 +63,57 @@ class Robot(Node):
         # These will hold the current pose and joint state of the robot
         self.pose = None
         self.joint_state = None
-        # Gripper state: False for open, True for closed
-        self.gripper_state = False
         # Set up the control loop
-        self.control_frequency = 50 #Hz
+        self.control_frequency = 100 #Hz
         self.dt = 1 / self.control_frequency
-        self.time = 0
         self.create_timer(timer_period_sec=self.dt, callback=self.control_loop)
         # Trajectory planner
         self.planner = Trajectory(dt=self.dt)
         # Generate the scanning trajectory
         self.scanning_traj = self.generate_scanning_task()
         # State variables
-        self.homed = False
         self.reached_scan_start = False
         self.scanning_done = False
+        self.pnp_done = False
+        self.pnp_i = 0
+        # Gripper states
+        self.GRIPPER_CLOSED = 0
+        self.GRIPPER_MOVING = 1
+        self.GRIPPER_OPEN = 2
+        self.gripper_state = self.GRIPPER_OPEN
+        self.change_gripper_state = False
+        self.gripper_target_state = self.GRIPPER_OPEN
 
     def control_loop(self):
         if not self.scanning_done:
             if not self.scanning_traj:
+                self.log('Scanning for cube locations and destinations done.')
                 self.scanning_done = True
+                # Generate the trajectories for pick and place
+                self.log('Generating the pick and place trajectories...')
+                self.pnp_traj = []
+                i = 0
+                for key1, key2 in zip(self.cube_locations.keys(), self.cube_destinations.keys()):
+                    self.pnp_traj.append(self.generate_pnp_task(self.cube_locations[key1], self.pnp_orientations[0]))
+                    self.pnp_traj.append(self.generate_homing_task(self.pnp_traj[-1][-1]))
+                    self.pnp_traj.append(self.generate_pnp_task(self.cube_destinations[key2], self.pnp_orientations[0]))
+                    self.pnp_traj.append(self.generate_homing_task(self.pnp_traj[-1][-1]))
+                    i += 4
             else:
                 self.moveTo(self.scanning_traj.pop(0))
-        else:
-            pass
-
+        elif not self.pnp_done:
+            if self.gripper_state != self.gripper_target_state:
+                self.set_gripper(self.gripper_target_state)
+            elif not self.pnp_traj[self.pnp_i]:
+                if self.pnp_i % 2 == 0:
+                    self.gripper_target_state = self.GRIPPER_OPEN if self.gripper_target_state == self.GRIPPER_CLOSED else self.GRIPPER_CLOSED
+                    target = 'Closing' if self.gripper_target_state == self.GRIPPER_CLOSED else 'Opening'
+                    self.log(f'{target} the gripper...')
+                self.pnp_i += 1
+                if self.pnp_i > 15:
+                    self.pnp_done = True
+            else:
+                self.moveTo(self.pnp_traj[self.pnp_i].pop(0))
 
     #-------------------------------------------------------------------------------------------------------------------
     #
@@ -97,14 +130,21 @@ class Robot(Node):
     #
     #-------------------------------------------------------------------------------------------------------------------
 
+    def generate_homing_task(self, starting_pose, duration=2):
+        # Homing
+        _, u = self.planner.linear_polynomial(0, duration, 0, 1)
+        q = self.planner.rectilinear_motion_primitive(u, starting_pose, self.HOME)
+
+        return q
+
     def generate_scanning_task(self, 
                                displacement = 0.2,
                                rectilinear_dt = 1.5,
                                circular_dt = 2):
-        center = np.array([0.0, 0.0, self.SCAN_START_OP.pose.position.z])
+        center = np.array([0.0, 0.0, self.SCAN_START.pose.position.z])
         # Linear motion to the scanning start
         t, u = self.planner.linear_polynomial(0, rectilinear_dt, 0, 1)
-        q = self.planner.rectilinear_motion_primitive(u, self.HOME_OP, self.SCAN_START_OP)
+        q = self.planner.rectilinear_motion_primitive(u, self.HOME, self.SCAN_START)
         # First arc
         t1, u1 = self.planner.linear_polynomial(t[-1], t[-1] + circular_dt, -np.pi/2, np.pi/2)
         q1, d1 = self.planner.circular_motion_primitive(u1, q[-1], center)
@@ -132,9 +172,17 @@ class Robot(Node):
         q5, _ = self.planner.circular_motion_primitive(u5, q4[-1], center)
         # Homing
         _, u6 = self.planner.linear_polynomial(t5[-1], t5[-1] + rectilinear_dt, 0, 1)
-        q6 = self.planner.rectilinear_motion_primitive(u6, q5[-1], self.HOME_OP)
+        q6 = self.planner.rectilinear_motion_primitive(u6, q5[-1], self.HOME)
 
         return q + q1 + q2 + q3 + q4 + q5 + q6
+
+    def generate_pnp_task(self, target_position, target_orientation, duration=2):
+        target_pose = PoseStamped(pose=Pose(position=target_position,orientation=target_orientation))
+        # Linear motion to the pick pose
+        _, u = self.planner.linear_polynomial(0, duration, 0, 1)
+        q = self.planner.rectilinear_motion_primitive(u, self.HOME, target_pose)
+
+        return q
 
     #-------------------------------------------------------------------------------------------------------------------
     #
@@ -142,11 +190,8 @@ class Robot(Node):
     #
     #-------------------------------------------------------------------------------------------------------------------
 
-    def close_gripper(self):
-        self.gripper_control_pub_.publish(Bool(data=True))
-
-    def open_gripper(self):
-        self.gripper_control_pub_.publish(Bool(data=False))
+    def set_gripper(self, state):
+        self.gripper_control_pub_.publish(Bool(data=state==self.GRIPPER_CLOSED))
 
     #-------------------------------------------------------------------------------------------------------------------
     #
@@ -155,18 +200,23 @@ class Robot(Node):
     #-------------------------------------------------------------------------------------------------------------------
 
     def pose_update(self, data):
-        self.pose = data.pose
+        self.pose = data
 
     def gripper_state_update(self, data):
-        # Don't need to record the position, just if it has closed
-        self.gripper_state = np.array(data.position)[-1] < 0.0275
+        gripper_span = data.position[-1] - data.position[-2]
+        if gripper_span < 0.056:
+            self.gripper_state = self.GRIPPER_CLOSED
+        elif gripper_span > 0.108:
+            self.gripper_state = self.GRIPPER_OPEN
+        else:
+            self.gripper_state = self.GRIPPER_MOVING
 
     def cube_callback(self, cube, cube_dict, dest=''):
         # Fills the entries in the provided dictionary, if they aren't already there
         # dest is just a cosmetic variable to distinguish between cube location and destination logging messages
         def callback(data):
             if cube_dict[cube] is None:
-                cube_dict[cube] = data.pose
+                cube_dict[cube] = data.pose.position
                 position = f"Position : ({data.pose.position.x:0.3f},{data.pose.position.y:0.3f},{data.pose.position.z:0.3f})"
                 orientation = f"Orientation : ({data.pose.orientation.x:0.3f},{data.pose.orientation.y:0.3f},{data.pose.orientation.z:0.3f},{data.pose.orientation.w:0.3f})"
                 self.log(f'Found {self.CUBE_NAMES[cube].lower()} cube {dest}: {position} {orientation}')
