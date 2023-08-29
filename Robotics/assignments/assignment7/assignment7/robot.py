@@ -1,5 +1,4 @@
 import copy
-import math
 import numpy as np
 
 from rclpy.node import Node
@@ -31,10 +30,10 @@ class Robot(Node):
 
         # Different orientations for pick and place
         VER_1 = Quaternion(x=np.sqrt(2)/2,y=np.sqrt(2)/2,z=0.0,w=0.0)
-        VER_2 = Quaternion(x=0.0,y=0.0,z=0.0,w=1.0)
-        HOR_1 = Quaternion(x=0.5,y=-0.5,z=0.5,w=0.5)
+        VER_2 = Quaternion(x=1.0,y=0.0,z=0.0,w=0.0)
+        HOR_1 = Quaternion(x=0.5, y=0.5, z=-0.5, w=-0.5)
         HOR_2 = Quaternion(x=np.sqrt(3)/2,y=0.0,z=0.0,w=0.5)
-        self.pnp_orientations = [VER_1, VER_2, HOR_1, VER_2, VER_2, HOR_2, HOR_2, HOR_1]
+        self.pnp_orientations = [VER_1, VER_2, VER_2, HOR_1, VER_1, VER_2, VER_1, VER_2]
 
         self.cube_locations = {self.RED    : None,
                                self.GREEN  : None,
@@ -60,9 +59,8 @@ class Robot(Node):
             self.cube_subs_.append(sub)
             sub = self.create_subscription(PoseStamped, '/dest_cube_' + val + '/pose', self.cube_callback(key, self.cube_destinations, 'destination'), 10)
             self.cube_subs_.append(sub)
-        # These will hold the current pose and joint state of the robot
+        # This will hold the current pose of the robot
         self.pose = None
-        self.joint_state = None
         # Set up the control loop
         self.control_frequency = 100 #Hz
         self.dt = 1 / self.control_frequency
@@ -81,8 +79,9 @@ class Robot(Node):
         self.GRIPPER_MOVING = 1
         self.GRIPPER_OPEN = 2
         self.gripper_state = self.GRIPPER_OPEN
-        self.change_gripper_state = False
         self.gripper_target_state = self.GRIPPER_OPEN
+        # Offset for place
+        self.cube_height = 0.05
 
     def control_loop(self):
         if not self.scanning_done:
@@ -94,9 +93,10 @@ class Robot(Node):
                 self.pnp_traj = []
                 i = 0
                 for key1, key2 in zip(self.cube_locations.keys(), self.cube_destinations.keys()):
-                    self.pnp_traj.append(self.generate_pnp_task(self.cube_locations[key1], self.pnp_orientations[0]))
+                    self.log(f'{i//2}')
+                    self.pnp_traj.append(self.generate_pnp_task(self.cube_locations[key1], self.pnp_orientations[i // 2]))
                     self.pnp_traj.append(self.generate_homing_task(self.pnp_traj[-1][-1]))
-                    self.pnp_traj.append(self.generate_pnp_task(self.cube_destinations[key2], self.pnp_orientations[0]))
+                    self.pnp_traj.append(self.generate_pnp_task(self.cube_destinations[key2], self.pnp_orientations[i // 2 + 1]))
                     self.pnp_traj.append(self.generate_homing_task(self.pnp_traj[-1][-1]))
                     i += 4
             else:
@@ -130,17 +130,10 @@ class Robot(Node):
     #
     #-------------------------------------------------------------------------------------------------------------------
 
-    def generate_homing_task(self, starting_pose, duration=2):
-        # Homing
-        _, u = self.planner.linear_polynomial(0, duration, 0, 1)
-        q = self.planner.rectilinear_motion_primitive(u, starting_pose, self.HOME)
-
-        return q
-
     def generate_scanning_task(self, 
                                displacement = 0.2,
-                               rectilinear_dt = 1.5,
-                               circular_dt = 2):
+                               rectilinear_dt = 2,
+                               circular_dt = 3):
         center = np.array([0.0, 0.0, self.SCAN_START.pose.position.z])
         # Linear motion to the scanning start
         t, u = self.planner.linear_polynomial(0, rectilinear_dt, 0, 1)
@@ -176,6 +169,19 @@ class Robot(Node):
 
         return q + q1 + q2 + q3 + q4 + q5 + q6
 
+    def generate_homing_task(self, starting_pose, duration=4):
+        # Move away from the pick/place spot
+        approach_pose = copy.deepcopy(starting_pose)
+        approach_pose.pose.position.z += 2 * self.cube_height
+        t, u = self.planner.linear_polynomial(0, duration/2, 0, 1)
+        q = self.planner.rectilinear_motion_primitive(u, starting_pose, approach_pose)
+        # Homing
+        _, u1 = self.planner.linear_polynomial(t[-1], t[-1] + duration/2, 0, 1)
+        q1 = self.planner.rectilinear_motion_primitive(u1, q[-1], self.HOME)
+
+        q = q + q1
+        return q
+    
     def generate_pnp_task(self, target_position, target_orientation, duration=2):
         target_pose = PoseStamped(pose=Pose(position=target_position,orientation=target_orientation))
         # Linear motion to the pick pose
@@ -183,6 +189,7 @@ class Robot(Node):
         q = self.planner.rectilinear_motion_primitive(u, self.HOME, target_pose)
 
         return q
+    
 
     #-------------------------------------------------------------------------------------------------------------------
     #
@@ -217,6 +224,7 @@ class Robot(Node):
         def callback(data):
             if cube_dict[cube] is None:
                 cube_dict[cube] = data.pose.position
+                if dest != '': cube_dict[cube].z -= self.cube_height
                 position = f"Position : ({data.pose.position.x:0.3f},{data.pose.position.y:0.3f},{data.pose.position.z:0.3f})"
                 orientation = f"Orientation : ({data.pose.orientation.x:0.3f},{data.pose.orientation.y:0.3f},{data.pose.orientation.z:0.3f},{data.pose.orientation.w:0.3f})"
                 self.log(f'Found {self.CUBE_NAMES[cube].lower()} cube {dest}: {position} {orientation}')

@@ -15,9 +15,9 @@ addpath(genpath('../common/'));
 
 %% SPHERE GENERATION
 % Sphere center - random
-P0 = randi(10, 1, 3); 
+P0 = [8,1,3]%randi(10, 1, 3); 
 % Sphere radius - random
-R = randi(10, 1, 1) + 1;
+R = 2%randi(10, 1, 1) + 1;
 % Generate the sphere's coordinates
 S = generateSphere(P0, R, 50);
 surf(S.X, S.Y, S.Z); 
@@ -27,9 +27,12 @@ colormap bone; axis equal; hold on;
 % Pick n random points
 i = randi([1 size(S.X, 1)], 1, 3);
 j = randi([1 size(S.X, 1)], 1, 3);
-P = [S.X(i(1), j(1)) S.X(i(2), j(2)) S.X(i(3), j(3));
-     S.Y(i(1), j(1)) S.Y(i(2), j(2)) S.Y(i(3), j(3));
-     S.Z(i(1), j(1)) S.Z(i(2), j(2)) S.Z(i(3), j(3))];
+%P = [S.X(i(1), j(1)) S.X(i(2), j(2)) S.X(i(3), j(3));
+     %S.Y(i(1), j(1)) S.Y(i(2), j(2)) S.Y(i(3), j(3));
+     %S.Z(i(1), j(1)) S.Z(i(2), j(2)) S.Z(i(3), j(3))];
+    P = [8.1216,    9.2748,    8.4231;
+   -0.9333,    1.0000,    2.3021;
+    3.4974,    1.4590,    4.4579];
 % Plot the points
 scatter3(P(1, :), P(2, :), P(3, :),'r','filled'); hold on;
 ax = gca; ax.Clipping = 'off';

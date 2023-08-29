@@ -35,12 +35,17 @@ function [G, t, n, b] = geodesic(P1, P2, P0, du)
               zeros(size(u))] + P0;
     G = G';
     % Compute the Frenet frame associated to each point
-    scale = -3; % Just to improve visualization
+    scale = 1; % Just to improve visualization
     t = Rt * [-R0*sin(u); R0*cos(u); zeros(1,size(u,2))];
-    t = scale*t./norm(t);
+    for i = 1:size(t, 2)
+        t(:, i) = t(:, i) / norm(t(:, i));
+    end
     n = Rt * [-R0*cos(u); -R0*sin(u); zeros(1,size(u,2))];
-    n = scale*n./norm(n);
+    for i = 1:size(n, 2)
+        n(:, i) = n(:, i) / norm(n(:, i));
+    end
     b = cross(t,n);
+    n = -n
 %     Sr = [    0 -r(3)  r(2); 
 %          r(3)     0 -r(1); 
 %          -r(2)  r(1)     0];
