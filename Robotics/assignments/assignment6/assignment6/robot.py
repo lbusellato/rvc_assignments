@@ -65,22 +65,30 @@ class Robot(Node):
         pos1 = np.array([self.sphere_positions[0].x,self.sphere_positions[0].y,self.sphere_positions[0].z])
         pos2 = np.array([self.sphere_positions[1].x,self.sphere_positions[1].y,self.sphere_positions[1].z])
         pos3 = np.array([self.sphere_positions[2].x,self.sphere_positions[2].y,self.sphere_positions[2].z])
-        linear_dt = 2
         # First geodesic
-        q1 = self.planner.geodesic(pos1, pos2, self.sphere_center, du=np.pi/120)
-        pose1 = q1[0]
+        q2 = self.planner.geodesic(pos1, pos2, self.sphere_center, du=0.001)
+        g1_begin = q2[0]
+        g1_end = q2[-1]
         # Second geodesic
-        q2 = self.planner.geodesic(pos2, pos3, self.sphere_center, du=np.pi/120)
+        q4 = self.planner.geodesic(pos2, pos3, self.sphere_center, du=0.001)
+        g2_begin = q4[0]
+        g2_end = q4[-1]
         # Third geodesic
-        q3 = self.planner.geodesic(pos3, pos1, self.sphere_center, du=np.pi/120)
+        q6 = self.planner.geodesic(pos3, pos1, self.sphere_center, du=0.001)
+        g3_begin = q6[0]
+        g3_end = q6[-1]
         # Linear motion to the first sphere
-        _, u = self.planner.linear_polynomial(0, linear_dt, 0, 1)
-        q = self.planner.rectilinear_motion_primitive(u, self.HOME, pose1)
+        _, u = self.planner.linear_polynomial(0, 2, 0, 1)
+        q1 = self.planner.rectilinear_motion_primitive(u, self.HOME, g1_begin)
         # Homing
-        _, u = self.planner.linear_polynomial(0, linear_dt, 0, 1)
-        q4 = self.planner.rectilinear_motion_primitive(u, pose1, self.HOME)
+        q8 = self.planner.rectilinear_motion_primitive(u, g1_begin, self.HOME)
+        # To align the orientations between the end of a geodesic and the beginning of the other
+        _, u = self.planner.linear_polynomial(0, 0.5, 0, 1)
+        q3 = self.planner.rectilinear_motion_primitive(u, g1_end, g2_begin)
+        q5 = self.planner.rectilinear_motion_primitive(u, g2_end, g3_begin)
+        q7 = self.planner.rectilinear_motion_primitive(u, g3_end, g1_begin)
 
-        q = q + q1 + q2 + q3 + q4
+        q = q1 + q2 + q3 + q4 + q5 + q6 + q7 + q8
         return q
 
     #-------------------------------------------------------------------------------------------------------------------

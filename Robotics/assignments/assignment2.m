@@ -32,11 +32,11 @@ vm = nan; % Maximum velocity
 % params = [0 5 5 0 2 nan nan nan nan nan nan]; % tc fixed, qf<qi
 % params = [1 5 0 5 2 nan nan nan nan nan nan]; % tc fixed, ti!=0
 % params = [0 5 0 5 nan 2 nan nan nan nan nan]; % vc fixed, triangular vel
-% params = [0 5 0 5 nan 1.5 nan nan nan nan nan]; % vc fixed, trapezoidal vel
+ params = [0 5 0 5 nan 1.5 nan nan nan nan nan]; % vc fixed, trapezoidal vel
 % params = [0 5 0 5 nan nan 2 nan nan nan nan]; % ac fixed
 % params = [0 5 0 5 nan 2 2 nan nan nan nan]; % vc and ac fixed
 % params = [0 5 0 5 nan nan nan 1 0.5 0.5 nan]; % dqi dqf and ddqmax fixed
- params = [0 5 0 5 nan nan nan 1 0.5 0.5 1.5]; % dqi dqf ddqmax and dqmax fixed
+% params = [0 5 0 5 nan nan nan 1 0.5 0.5 1.5]; % dqi dqf ddqmax and dqmax fixed
 
 %% TRAPEZOIDAL TRAJECTORY GENERATION
 [q,v,a,t] = generateTrapezoidal(params(1),params(2),params(3), ...

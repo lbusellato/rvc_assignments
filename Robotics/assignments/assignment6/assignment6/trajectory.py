@@ -38,7 +38,7 @@ class Trajectory():
     
     def geodesic(self, P1, P2, P0, du = np.pi/24):
         # Compute the radius
-        R0 = np.linalg.norm(P1 - P0)
+        R0 = np.linalg.norm(P1 - P0) + 0.075 # Offset to avoid the robot colliding with the spheres
         # Compute the radius vectors
         R1 = self.normalize(P1 - P0)
         R2 = self.normalize(P2 - P0)
