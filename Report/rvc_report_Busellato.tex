@@ -1,0 +1,175 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsfonts} 
+\usepackage{physics} 
+\usepackage{rotating}
+\usepackage{enumitem}
+\setlength{\headheight}{15pt}
+\usepackage[italian]{varioref}
+\usepackage{hyperref}
+\usepackage{steinmetz}
+\hypersetup{colorlinks=true, linkcolor=magenta, citecolor=green, urlcolor=blue} 
+\usepackage{mathtools}
+\hypersetup{linktoc=page}
+\usepackage{extramarks}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={190mm,257mm},
+ left=15mm,
+ right=15mm,
+ top=20mm,
+ }
+\usepackage{graphicx}
+\usepackage{cancel}
+\graphicspath{ {./images/} }
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\usepackage{amsthm}
+\usepackage{etoolbox}
+\newtheoremstyle{break}
+  {\topsep}{\topsep}%
+  {\itshape}{}%
+  {\bfseries}{}%
+  {\newline}{}%
+\theoremstyle{break}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}{Example}[section]
+\newtheorem{hw}{Exercise}[section]
+\newtheorem{theorem}{Theorem}[section]
+\BeforeBeginEnvironment{minipage}{\medskip}
+\AfterEndEnvironment{minipage}{\medskip}
+\usepackage{tocloft}
+
+\usepackage{indentfirst}
+\usepackage{tikz}
+\usepackage{afterpage}
+\numberwithin{equation}{section}
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+    \addtocounter{page}{-1}%
+    \newpage}
+\newcommand\blankpagewnumber{%
+    \null
+    \newpage}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\U}{\mathcal{U}}
+\renewcommand{\L}{\mathcal{L}}
+\usepackage{blkarray, bigstrut}
+\usepackage[T1]{fontenc}
+% --- Macro \xvec
+\makeatletter
+\newlength\xvec@height%
+\newlength\xvec@depth%
+\newlength\xvec@width%
+\newcommand{\xvec}[2][]{%
+  \ifmmode%
+    \settoheight{\xvec@height}{$#2$}%
+    \settodepth{\xvec@depth}{$#2$}%
+    \settowidth{\xvec@width}{$#2$}%
+  \else%
+    \settoheight{\xvec@height}{#2}%
+    \settodepth{\xvec@depth}{#2}%
+    \settowidth{\xvec@width}{#2}%
+  \fi%
+  \def\xvec@arg{#1}%
+  \def\xvec@dd{:}%
+  \def\xvec@d{.}%
+  \raisebox{.2ex}{\raisebox{\xvec@height}{\rlap{%
+    \kern.05em%  (Because left edge of drawing is at .05em)
+    \begin{tikzpicture}[scale=1]
+    \pgfsetroundcap
+    \draw (.05em,0)--(\xvec@width-.05em,0);
+    \draw (\xvec@width-.05em,0)--(\xvec@width-.15em, .075em);
+    \draw (\xvec@width-.05em,0)--(\xvec@width-.15em,-.075em);
+    \ifx\xvec@arg\xvec@d%
+      \fill(\xvec@width*.45,.5ex) circle (.5pt);%
+    \else\ifx\xvec@arg\xvec@dd%
+      \fill(\xvec@width*.30,.5ex) circle (.5pt);%
+      \fill(\xvec@width*.65,.5ex) circle (.5pt);%
+    \fi\fi%
+    \end{tikzpicture}%
+  }}}%
+  #2%
+}
+\makeatother
+
+% --- Override \vec with an invocation of \xvec.
+\let\stdvec\vec
+\renewcommand{\vec}[1]{\xvec[]{#1}}
+% --- Define \dvec and \ddvec for dotted and double-dotted vectors.
+\newcommand{\dvec}[1]{\xvec[.]{#1}}
+\newcommand{\ddvec}[1]{\xvec[:]{#1}}
+
+\bibliographystyle{plain} 
+
+\usepackage{algpseudocode}
+\begin{document}
+\afterpage{\blankpage}
+\begin{titlepage}
+\begin{center}
+\huge Master's degree in Computer Engineering for Robotics and Smart Industry
+\end{center}
+\vspace*{\fill}
+\begin{center}
+\textbf{\Huge Robotics, Vision and Control}
+\end{center}
+\begin{center}
+Report on the assignments given during the 2021/2022 a.y.
+\end{center}
+\vspace*{\fill}
+\begin{center}
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft}
+Author: Lorenzo Busellato, VR472249\\
+email: lorenzo.busellato\_02@studenti.univr.it
+\end{flushleft}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{flushright}
+\includegraphics[keepaspectratio,width=0.6\textwidth]{logo}
+\end{flushright}
+\end{minipage}
+
+\end{center}
+\vspace{1cm}
+\end{titlepage}
+
+
+\afterpage{\blankpage}
+\thispagestyle{empty}
+\setcounter{page}{0}
+\pagenumbering{gobble}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\setcounter{tocdepth}{2}
+\tableofcontents
+\clearpage
+
+\fancyhead[R]{}
+\fancyhead[L]{}
+\pagestyle{fancy}
+\pagenumbering{arabic}
+
+\include{sections/assignment1}
+
+
+\include{sections/assignment2}
+
+
+\include{sections/assignment3}
+
+
+\include{sections/assignment4}
+
+
+\include{sections/assignment5}
+
+
+\include{sections/assignment6}
+
+
+\end{document}

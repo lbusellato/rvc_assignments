@@ -1,0 +1,14 @@
+\BOOKMARK [1][-]{section.1}{Assignment 1}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Implement in MATLAB 3rd-, 5th-, 7th-order polynomials for qi>qf and qi<qf and for t[ti,tf] and t[0,T]}{section.1}% 2
+\BOOKMARK [1][-]{section.2}{Assignment 2}{}% 3
+\BOOKMARK [2][-]{subsection.2.1}{Implement in MATLAB the trapezoidal trajectory taking into account the different constraints.}{section.2}% 4
+\BOOKMARK [1][-]{section.3}{Assignment 3}{}% 5
+\BOOKMARK [2][-]{subsection.3.1}{Interpolating polynomials with computed velocities at path points and imposed velocity at initial/final points.}{section.3}% 6
+\BOOKMARK [2][-]{subsection.3.2}{Interpolating polynomials with continuous accelerations at path points and imposed velocity at initial/final points \(+ Thomas algorithm\)}{section.3}% 7
+\BOOKMARK [1][-]{section.4}{Assignment 4}{}% 8
+\BOOKMARK [2][-]{subsection.4.1}{Compute cubic splines based on the accelerations with assigned initial and final velocities.}{section.4}% 9
+\BOOKMARK [2][-]{subsection.4.2}{Compute the smoothing cubic splines.}{section.4}% 10
+\BOOKMARK [1][-]{section.5}{Assignment 5}{}% 11
+\BOOKMARK [2][-]{subsection.5.1}{Compute the 3D trajectory \(position, velocity, acceleration and jerk\) in the picture as a combination of linear and circular motion primitives and compare it with the trajectory obtained using one of the multi-point methods.}{section.5}% 12
+\BOOKMARK [1][-]{section.6}{Assignment 6}{}% 13
+\BOOKMARK [2][-]{subsection.6.1}{Let p1 , p2 , p3 be three points on a sphere of center P0 and radius R. Design the trajectory such that \(1\) the EE will pass through the three points along the shortest path, and \(2\) the z axis of the EE is always orthogonal to the sphere.}{section.6}% 14
