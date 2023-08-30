@@ -16,20 +16,20 @@ addpath(genpath('../data/'));
 
 %% LOAD AND DISPLAY IMAGE 
 % Choose which image
-imNo = 2;
+imNo = 1;
 rgb = imread(['data/assignment5/' num2str(imNo) '_rgb.jpg']);
 depth = imread(['data/assignment5/' num2str(imNo) '_depth.png']);
-figure(); imshowpair(rgb,depth,'montage'); title('Original vs depth image');
+figure(1); imshowpair(rgb,depth,'montage'); title('Original vs depth image');
 
 %% DEPTH THRESHOLDING
 if imNo == 1
     mask = depth >= 600 & depth <= 645;
 elseif imNo == 2
-    mask = depth >= 700 & depth <= 770;
+    mask = depth >= 700 & depth <= 752;
 end
 % NB no image binarization needed since I work on the mask
 mask = imopen(mask,strel('disk',10));
-figure(); imshow(mask); title('Extracted shape');
+figure(2); imshow(mask); title('Extracted shape');
 
 %% SHAPE REFINEMENT - BOUNDARY & CONNECTED COMPONENTS EXTRACTION
 % Improve connectivity with image opening and fill the holes
@@ -53,9 +53,9 @@ end
 show_mask = zeros(size(mask,1),size(mask,2),3);
 show_mask(:,:,1) = mask_boundary;
 % Show the boundary
-figure(); imshow(show_mask); title('Boundary');
+figure(3); imshow(show_mask); title('Boundary');
 % Show the result of the masking in color
-figure(); imshow(rgb.*uint8(repmat(mask,[1 1 3]))); title('Masked image');
+figure(4); imshow(rgb.*uint8(repmat(mask,[1 1 3]))); title('Masked image');
 
 %% 3D POINT CLOUD
 % Internal camera parameters
@@ -66,6 +66,7 @@ v0 = 239.5; % v coordinate of the principal point
 cameraParams = [fu fv u0 v0];
 % Generate and plot the 3D point cloud
 [cloud,cloud_rgb] = generatePointCloud(rgb,uint16(mask).*depth,cameraParams);
+figure(5);
 scatter3(cloud(:,1),cloud(:,2),cloud(:,3), 6, cloud_rgb, '.');
 xlabel('X'); ylabel('Y'); zlabel('Z'); title('3D point cloud'); axis equal;
 % Save the result
@@ -83,7 +84,7 @@ x = c(1) + D/sqrt(1+abs(m));
 y = m*(x - c(1)) + c(2);
 p = [x; y]';
 % Plot the points on the 2D image
-figure(); imshow(mask); hold on;
+figure(6); imshow(mask); hold on;
 scatter(c(1),c(2),'r','filled');
 scatter(p(:,1),p(:,2),'b','filled');
 title('Main orientation'); drawnow;
@@ -92,7 +93,7 @@ M = uint16([c; p]);
 p_mask = false(size(mask));
 p_mask(sub2ind(size(mask),M(:,2),M(:,1))) = true;
 [orientation_cloud,~] = generatePointCloud(rgb,uint16(p_mask).*depth,cameraParams);
-figure(); scatter3(cloud(:,1),cloud(:,2),cloud(:,3), 6, cloud_rgb, '.');
+figure(7); scatter3(cloud(:,1),cloud(:,2),cloud(:,3), 6, cloud_rgb, '.');
 xlabel('X'); ylabel('Y'); zlabel('Z'); title('Main orientation'); 
 hold on;
 scatter3(orientation_cloud(:,1),orientation_cloud(:,2),orientation_cloud(:,3), 18, 'r', 'filled');

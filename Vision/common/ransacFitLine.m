@@ -11,7 +11,6 @@
 function [m,q,outliers] = ransacFitLine(data, sampleNumber, maxIterations, threshold)
     inlier_max = 0;
     for it = 1:maxIterations 
-        inlier_cnt = 0;
         % Select n random elements from data
         ids = ceil(rand(1,sampleNumber)*size(data,1));
         % Fit a line on them
