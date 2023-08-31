@@ -25,14 +25,14 @@ figure(1); imshowpair(rgb,depth,'montage'); title('Original vs depth image');
 if imNo == 1
     mask = depth >= 600 & depth <= 645;
 elseif imNo == 2
-    mask = depth >= 700 & depth <= 752;
+    mask = depth >= 1200 & depth <= 1550;
+    mask = imclose(mask,strel('disk',35));
 end
-% NB no image binarization needed since I work on the mask
-mask = imopen(mask,strel('disk',10));
 figure(2); imshow(mask); title('Extracted shape');
 
 %% SHAPE REFINEMENT - BOUNDARY & CONNECTED COMPONENTS EXTRACTION
 % Improve connectivity with image opening and fill the holes
+% NB no image binarization needed since I work on the mask
 mask = bwareaopen(mask,1000);
 mask = imfill(mask,'holes');
 % Extract the connected components
@@ -79,15 +79,10 @@ c = props.Centroid;
 d = props.Orientation;
 % Compute some points along the main orientation
 m = -tand(d);
-D = [-10:2:-1 2:2:10];
+D = [-15:2:-1 2:2:15];
 x = c(1) + D/sqrt(1+abs(m));
 y = m*(x - c(1)) + c(2);
 p = [x; y]';
-% Plot the points on the 2D image
-figure(6); imshow(mask); hold on;
-scatter(c(1),c(2),'r','filled');
-scatter(p(:,1),p(:,2),'b','filled');
-title('Main orientation'); drawnow;
 % Plot the points in the 3D cloud of points
 M = uint16([c; p]);
 p_mask = false(size(mask));
@@ -139,45 +134,65 @@ points = generatePointCloud(rgb,uint16(mask_boundary).*depth,cameraParams);
 figure(); scatter3(cloud(:,1),cloud(:,2),cloud(:,3), 6, cloud_rgb, '.');
 xlabel('X'); ylabel('Y'); zlabel('Z'); title('Boundary line fitting'); hold on;
 scatter3(points(:,1),points(:,2),points(:,3),5,'filled');
-% Apply ransac four times, removing each time the inliers of the previous
-sampleNumber = 5;
-maxIterations = 1000; 
-threshold = 4;
+% Apply ransac, removing each time the inliers of the previous
 linesM = zeros(3,4);
 linesQ = zeros(3,4);
-for i = 1:4
+if imNo == 1
+    N = 4;
+    sampleNumber = 5;
+    maxIterations = 1000; 
+    threshold = 4;
+    xmin = 200;
+    xmax = 200;
+else
+    N = 8;
+    sampleNumber = 3;
+    maxIterations = 4000; 
+    threshold = 12;
+    xmin = 1000;
+    xmax = 1000;
+end
+for i = 1:N
     [m,q,points] = ransacFitLine(points, ...
                                   sampleNumber, ...
                                   maxIterations, ...
                                   threshold);
     linesM(:,i) = m; linesQ(:,i) = q;
     % Plot the line
-    x = -2*max(cloud(:,1)):2*max(cloud(:,1));
+    x = -xmin:1:xmax;
     L = (m.*x + q)';
-    hold on; scatter3(L(:,1),L(:,2),L(:,3),5,'filled'); 
+    hold on; scatter3(L(:,1),L(:,2),L(:,3),5,'filled'); hold on;
+    text(L(1,1),L(1,2),L(1,3),num2str(i))
 end
 axis equal; ax = gca; ax.Clipping = 'off';
 
-%% CORNER DETECTION
+% CORNER DETECTION
 intersectingLines = [];
-for i = 1:4
-    for j = 1:4
-        if j ~= i
-            a = angleBetweenLines(linesM(:,i),linesM(:,j));
-            if a >= 80 && a <= 100
-                intersectingLines = [intersectingLines; i j];
+if N == 4
+    for i = 1:4
+        for j = 1:4
+            if j ~= i
+                a = angleBetweenLines(linesM(:,i),linesM(:,j));
+                if (N == 4 && abs(abs(a) - 90) < 10) || ...
+                   (N == 8 && (abs(abs(a) - 45) < 10 || abs(abs(a) - 135) < 10))
+                    intersectingLines = [intersectingLines; i j];
+                end
             end
         end
-    end
-end   
-intersectingLines = unique(sort(intersectingLines,2),'rows');
+    end   
+    intersectingLines = unique(sort(intersectingLines,2),'rows');
+else
+    intersectingLines = [1,6;1,7;2,5;2,8;3,5;3,6;4,7;4,8];
+end
 corners = [];
-for i = 1:4
+for i = 1:size(intersectingLines,1)
     q1 = linesQ(:,intersectingLines(i,1));
     m1 = linesM(:,intersectingLines(i,1));
     q2 = linesQ(:,intersectingLines(i,2));
     m2 = linesM(:,intersectingLines(i,2));
     corners = [corners; lineIntersection(q1,m1,q2,m2)'];
 end
+centroid = mean(corners,1);
 hold on;
-scatter3(corners(:,1),corners(:,2),corners(:,3),35,'filled','MarkerEdgeColor','b','MarkerFaceColor','b'); 
+scatter3(corners(:,1),corners(:,2),corners(:,3),35,'filled','MarkerEdgeColor','r','MarkerFaceColor','r');
+scatter3(centroid(1),centroid(2),centroid(3),35,'filled','MarkerEdgeColor','g','MarkerFaceColor','g');

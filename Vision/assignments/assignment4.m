@@ -16,7 +16,7 @@ addpath(genpath('../data/assignment4/'));
 
 %% LOAD THE IMAGE AND CONVERT TO B/W
 
-imageNo = 1;
+imageNo = 2;
 I = rgb2gray(imread(strcat(num2str(imageNo),'.png')));
 figure(1);
 imshow(I); title('Original image'); drawnow;
