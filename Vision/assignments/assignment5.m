@@ -166,7 +166,7 @@ for i = 1:N
 end
 axis equal; ax = gca; ax.Clipping = 'off';
 
-% CORNER DETECTION
+%% CORNER DETECTION
 intersectingLines = [];
 if N == 4
     for i = 1:4
@@ -182,6 +182,8 @@ if N == 4
     end   
     intersectingLines = unique(sort(intersectingLines,2),'rows');
 else
+    % A way to distinguish between the octagon vertices and the other line
+    % intersections would be nice
     intersectingLines = [1,6;1,7;2,5;2,8;3,5;3,6;4,7;4,8];
 end
 corners = [];

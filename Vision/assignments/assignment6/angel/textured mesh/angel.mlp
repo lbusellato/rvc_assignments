@@ -1,0 +1,12 @@
+<!DOCTYPE MeshLabDocument>
+<MeshLabProject>
+ <MeshGroup>
+  <MLMesh label="Textured_mesh_1.obj" filename="testTextured_mesh_1.obj" visible="1" idInFile="-1">
+   <MLMatrix44>
+1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 
+</MLMatrix44>
+   <RenderingOption boxColor="234 234 234 255" wireWidth="1" wireColor="64 64 64 255" solidColor="192 192 192 255" pointColor="252 233 79 255" pointSize="3">100001000000000000000100000001011101010010100000000100111111100000001001</RenderingOption>
+  </MLMesh>
+ </MeshGroup>
+ <RasterGroup/>
+</MeshLabProject>
