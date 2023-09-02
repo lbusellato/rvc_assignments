@@ -20,7 +20,7 @@ ptCloud = pcread("data/assignment3/dense_point_cloud.ply");
 ptCloud = pcdownsample(ptCloud, "random", 0.5);
 P = ptCloud.Location;
 
-%% EXTRINSIC CENTROID
+%% CENTROID
 X = ptCloud.Location(:,1);
 Y = ptCloud.Location(:,2);
 Z = ptCloud.Location(:,3);
@@ -40,9 +40,10 @@ C = dX' * dX;
 % Rotation matrix
 R = U';
 % Translation vector
-t = -U'*P0';
+t = U'*P0';
 Pc = R*P' - t;
 Pc0 = R*P0' - t;
 scatter3(Pc(1,:), Pc(2,:), Pc(3,:), 'b', 'filled'); hold on;
 scatter3(Pc0(1), Pc0(2), Pc0(3), 'g', 'filled'); hold on;
+xlabel('X'); ylabel('Y'); zlabel('Z');
 title('Zephyr orientation (red) vs canonical orientation (blue), centroids in green');

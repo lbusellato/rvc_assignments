@@ -1,0 +1,30 @@
+<!DOCTYPE MeshLabDocument>
+<MeshLabProject>
+ <MeshGroup>
+  <MLMesh filename="../visibility/SamPointCloud.ply" label="SamPointCloud.ply" visible="0" idInFile="-1">
+   <MLMatrix44>
+1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 
+</MLMatrix44>
+   <RenderingOption pointSize="3" boxColor="234 234 234 255" pointColor="252 233 79 255" wireColor="64 64 64 255" solidColor="192 192 192 255" wireWidth="1">000111010000000000000100000001001100000010100000000100111010110000001001</RenderingOption>
+  </MLMesh>
+  <MLMesh filename="../dense/Dense point cloud 1.ply" label="Dense point cloud 1.ply" visible="0" idInFile="-1">
+   <MLMatrix44>
+1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 
+</MLMatrix44>
+   <RenderingOption pointSize="3" boxColor="234 234 234 255" pointColor="252 233 79 255" wireColor="64 64 64 255" solidColor="192 192 192 255" wireWidth="1">000111010000000000000100000001001100000010100000000100111010110000001001</RenderingOption>
+  </MLMesh>
+  <MLMesh filename="../dense/testDense point cloud 1.ply" label="testDense point cloud 1.ply" visible="0" idInFile="-1">
+   <MLMatrix44>
+1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 
+</MLMatrix44>
+   <RenderingOption pointSize="3" boxColor="234 234 234 255" pointColor="252 233 79 255" wireColor="64 64 64 255" solidColor="192 192 192 255" wireWidth="1">000111010000000000000100000001001100000010100000000100111010110000001001</RenderingOption>
+  </MLMesh>
+  <MLMesh filename="Mesh_1.ply" label="Mesh_1.ply" visible="1" idInFile="-1">
+   <MLMatrix44>
+1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 
+</MLMatrix44>
+   <RenderingOption pointSize="3" boxColor="234 234 234 255" pointColor="252 233 79 255" wireColor="64 64 64 255" solidColor="192 192 192 255" wireWidth="1">100001010000000000000100000001011110000010100000000100111010100000001001</RenderingOption>
+  </MLMesh>
+ </MeshGroup>
+ <RasterGroup/>
+</MeshLabProject>
