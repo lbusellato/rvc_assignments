@@ -1,4 +1,3 @@
-import copy
 import numpy as np
 
 from geometry_msgs.msg import Point, Quaternion, Pose, PoseStamped

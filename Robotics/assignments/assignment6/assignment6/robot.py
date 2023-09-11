@@ -3,8 +3,6 @@ import numpy as np
 
 from rclpy.node import Node
 from geometry_msgs.msg import Pose, Point, Quaternion, PoseStamped
-from sensor_msgs.msg import JointState
-from std_msgs.msg import Bool
 
 from .trajectory import Trajectory
 

@@ -14,17 +14,18 @@
 \BOOKMARK [1][-]{section.1.6}{Assignment 6}{chapter.1}% 14
 \BOOKMARK [2][-]{subsection.1.6.1}{Let p1 , p2 , p3 be three points on a sphere of center P0 and radius R. Design the trajectory such that \(1\) the EE will pass through the three points along the shortest path, and \(2\) the z axis of the EE is always orthogonal to the sphere.}{section.1.6}% 15
 \BOOKMARK [1][-]{section.1.7}{Assignment 7}{chapter.1}% 16
-\BOOKMARK [0][-]{chapter.2}{Vision}{}% 17
-\BOOKMARK [1][-]{section.2.1}{Assignment 1}{chapter.2}% 18
-\BOOKMARK [2][-]{subsection.2.1.1}{3D model creation using Zephyr}{section.2.1}% 19
-\BOOKMARK [1][-]{section.2.2}{Assignment 2}{chapter.2}% 20
-\BOOKMARK [2][-]{subsection.2.2.1}{3D point cloud from range image}{section.2.2}% 21
-\BOOKMARK [2][-]{subsection.2.2.2}{Mesh from point cloud}{section.2.2}% 22
-\BOOKMARK [1][-]{section.2.3}{Assignment 3}{chapter.2}% 23
-\BOOKMARK [2][-]{subsection.2.3.1}{Compute the canonical orientation of the 3D model}{section.2.3}% 24
-\BOOKMARK [1][-]{section.2.4}{Assignment 4}{chapter.2}% 25
-\BOOKMARK [2][-]{subsection.2.4.1}{Image analysis using morphological operators}{section.2.4}% 26
-\BOOKMARK [1][-]{section.2.5}{Assignment 5}{chapter.2}% 27
-\BOOKMARK [2][-]{subsection.2.5.1}{3D analysis pipeline}{section.2.5}% 28
-\BOOKMARK [1][-]{section.2.6}{Assignment 6}{chapter.2}% 29
-\BOOKMARK [2][-]{subsection.2.6.1}{Pose reconstruction pipeline}{section.2.6}% 30
+\BOOKMARK [2][-]{subsection.1.7.1}{Plan the pick-and-place task for the UR5 robot in ROS.}{section.1.7}% 17
+\BOOKMARK [0][-]{chapter.2}{Vision}{}% 18
+\BOOKMARK [1][-]{section.2.1}{Assignment 1}{chapter.2}% 19
+\BOOKMARK [2][-]{subsection.2.1.1}{3D model creation using Zephyr}{section.2.1}% 20
+\BOOKMARK [1][-]{section.2.2}{Assignment 2}{chapter.2}% 21
+\BOOKMARK [2][-]{subsection.2.2.1}{3D point cloud from range image}{section.2.2}% 22
+\BOOKMARK [2][-]{subsection.2.2.2}{Mesh from point cloud}{section.2.2}% 23
+\BOOKMARK [1][-]{section.2.3}{Assignment 3}{chapter.2}% 24
+\BOOKMARK [2][-]{subsection.2.3.1}{Compute the canonical orientation of the 3D model}{section.2.3}% 25
+\BOOKMARK [1][-]{section.2.4}{Assignment 4}{chapter.2}% 26
+\BOOKMARK [2][-]{subsection.2.4.1}{Image analysis using morphological operators}{section.2.4}% 27
+\BOOKMARK [1][-]{section.2.5}{Assignment 5}{chapter.2}% 28
+\BOOKMARK [2][-]{subsection.2.5.1}{3D analysis pipeline}{section.2.5}% 29
+\BOOKMARK [1][-]{section.2.6}{Assignment 6}{chapter.2}% 30
+\BOOKMARK [2][-]{subsection.2.6.1}{Object to camera pose framework}{section.2.6}% 31

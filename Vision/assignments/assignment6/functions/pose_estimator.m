@@ -53,8 +53,8 @@ p3D_best = p3D_check(inliers,:);
 disp('Computing exterior parameters');
 G = compute_exterior(testK,[eye(3) zeros(3,1)], p2D_best(modelPoints,:)',p3D_best(modelPoints,:)', method);
 G %show on command line
-%plotOnImage(checkImg,p2D_best(modelPoints,:), p3D_best(modelPoints,:), testK, G);
-%title(strcat('Projection of best model points on test image with ',string(method)));
+plotOnImage(checkImg,p2D_best(modelPoints,:), p3D_best(modelPoints,:), testK, G);
+title(strcat('Projection of best model points on test image with ',string(method)));
 
 R = G(1:3,1:3);
 T = G(1:3, 4);

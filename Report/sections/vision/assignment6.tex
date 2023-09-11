@@ -1,3 +1,87 @@
 \section{Assignment 6}
 
-\subsection{Pose reconstruction pipeline}
+\subsection{Object to camera pose framework}
+
+The model computed in the first assignment was used to test an object to camera pose framework (\url{https://github.com/creminem94/CameraPoseEstimation}).
+
+The pipeline is as follows:
+\begin{itemize}
+\item Choosing the reference image among the ones used in Zephyr.
+\item Exporting the reference camera's intrinsic parameters and point visibility from Zephyr.
+\item Creating the reference model.
+\item Choosing some new images of the object.
+\item Iteratively applying pose estimation using Fiore's method to them to compute the poses.
+\end{itemize}
+
+\begin{figure}[h]
+\centering
+\includegraphics[keepaspectratio,width=0.5\textwidth]{angelref}
+\caption{Reference image}
+\end{figure}
+
+\newpage
+
+Some results: in red the actual 2D feature points, in blue the reprojection using the computed camera poses.
+
+\begin{figure}[h]
+\centering
+\begin{minipage}{0.45\textwidth}
+\includegraphics[keepaspectratio,width=0.9\textwidth]{55}
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+\includegraphics[keepaspectratio,width=0.9\textwidth]{57}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.45\textwidth}
+\includegraphics[keepaspectratio,width=0.9\textwidth]{58}
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+\includegraphics[keepaspectratio,width=0.9\textwidth]{59}
+\end{minipage}
+\end{figure}
+
+\newpage
+
+\begin{figure}[h]
+\centering
+\begin{minipage}{0.45\textwidth}
+\includegraphics[keepaspectratio,width=0.9\textwidth]{60}
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+\includegraphics[keepaspectratio,width=0.9\textwidth]{61}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.45\textwidth}
+\includegraphics[keepaspectratio,width=0.9\textwidth]{62}
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+\includegraphics[keepaspectratio,width=0.9\textwidth]{63}
+\end{minipage}
+\end{figure}
+
+\newpage
+
+\begin{figure}[h]
+\centering
+\begin{minipage}{0.45\textwidth}
+\includegraphics[keepaspectratio,width=0.9\textwidth]{109}
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+\includegraphics[keepaspectratio,width=0.9\textwidth]{110}
+\end{minipage}
+\end{figure}
+
+\newpage
+
+Reconstructed camera poses:
+
+\begin{figure}[h]
+\centering
+\includegraphics[keepaspectratio,width=0.9\textwidth]{poses}
+\end{figure}

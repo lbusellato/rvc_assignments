@@ -10,6 +10,7 @@ modelFile = 'models/refDescriptorsAngel';
 load(modelFile); %variable referenceModel
 
 for i = [55,57,58,59,60,61,62,63,109,110]
+figure(i);
 checkImageFile = "angel/photo/angel ("+num2str(i)+").jpg";
 paramsFile = "angel/visibility/angel ("+num2str(i)+").xmp";
 testK = getAngelInternals(paramsFile); % estimated internal params of test image
