@@ -17,13 +17,13 @@ addpath(genpath('../common/'));
 
 ti = 1; % Initial time
 tf = 2; % Final time
-qi = 0; % Initial position
+qi = 2; % Initial position
 qf = 1; % Final position
-vi = 0; % Initial velocity
+vi = 1; % Initial velocity
 vf = 0; % Final velocity
-ai = 0; % Initial acceleration
-af = 0; % Final acceleration
-ji = 0; % Initial jerk
+ai = 2; % Initial acceleration
+af = 2; % Final acceleration
+ji = 2; % Initial jerk
 jf = 0; % Final jerk
 
 %% TRAJECTORY GENERATION

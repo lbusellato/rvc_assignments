@@ -4,8 +4,6 @@
 
 2D image analysis can be carried out with the use of morphological operators. Image closing and opening let us remove the background of pictures and isolate the objects within them. More complex operations can then be carried out, inferring for example geometric information on the shapes produced.
 
-Classification used the 'Circularity' property to distinguish between coins and USB stick, as well as the 'MajorAxis' and 'MinorAxis' properties, which were averaged to compute the radius of the coins to detect which was smaller and which was bigger.
-
 \subsubsection{Example 1}
 
 Background removed by opening with a structuring element in the shape of a disk of size 65. Shapes improved by image closing with a structuring element in the shape of a disk of size 25 and by filling holes. Noise removed after image binarization with area opening, removing all shapes with fewer than 50 pixels.

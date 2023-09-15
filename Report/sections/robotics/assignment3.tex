@@ -59,18 +59,23 @@ Imposing acceleration continuity at path points results in the definition of a l
 
 \begin{equation*}
 \begin{bmatrix}
-b_1 & c_1 & 0 & \dots\\
-a_2 & b_2 & c_2 & 0 & \dots\\
-0 & \ddots & \ddots & \ddots & 0 & \dots\\
-& 0 & a_k & b_k & c_k & 0 & \dots\\
-& & 0 & \ddots & \ddots & \ddots & 0 \\
-& & & 0 & a_{n-1} & b_{n-1} & c_{n-1}\\
-& & & & 0 & a_n & b_n
+2(T_0+T_1) & T_0 &  &\\
+T_2 & 2(T_1+T_2) & T_1 &  & \\
+ & \ddots & \ddots & \ddots &  & \\
+& & T_{k+1} & 2(T_k+T_{k+1}) & T_k &  & \\
+& & & \ddots & \ddots & \ddots &  \\
+& & & & & T_{n-1} & 2(T_{n-2} + T_{n-1})
 \end{bmatrix}\begin{bmatrix}
-\dot q_1\\\vdots\\\dot  q_k\\\vdots \\ \dot q_n
+\dot q_1\\\vdots\\\dot  q_k\\\vdots \\ \dot q_{n-1}
 \end{bmatrix}=\begin{bmatrix}
-d_1\\\vdots\\ d_k\\\vdots \\ d_n
+c_0-T_1\dot q_0\\\vdots\\ c_k\\\vdots \\ c_{n-2}-T_{n-2}\dot q_n
 \end{bmatrix}
+\end{equation*}
+
+where $T_k=t_{k+1}-t_k$ and:
+
+\begin{equation*}
+c_k=3\frac{T_{k+1}}{T_k}(q_{k+1}-q_k)+3\frac{T_{k}}{T_{k+1}}(q_{k+2}-q_{k+1})
 \end{equation*}
 
 Thomas' algorithm is as follows:
@@ -100,7 +105,7 @@ Backward substitution:
 \end{minipage}
 
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{minipage}{0.5\textwidth}
 \centering
 \includegraphics[keepaspectratio,width=\textwidth]{cubic_2}

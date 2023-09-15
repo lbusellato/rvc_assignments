@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2023.8.29)  11 SEP 2023 17:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2023.8.29)  15 SEP 2023 11:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1051,11 +1051,11 @@ File: ./images/poly_3.png Graphic file (type png)
 <use ./images/poly_3.png>
 Package pdftex.def Info: ./images/poly_3.png  used on input line 35.
 (pdftex.def)             Requested size: 512.14963pt x 270.42874pt.
-<./images/poly_4.png, id=208, 1169.11781pt x 616.55344pt>
+<./images/poly_4.png, id=208, 1184.17406pt x 681.29532pt>
 File: ./images/poly_4.png Graphic file (type png)
 <use ./images/poly_4.png>
 Package pdftex.def Info: ./images/poly_4.png  used on input line 42.
-(pdftex.def)             Requested size: 512.14963pt x 270.09895pt.
+(pdftex.def)             Requested size: 512.14963pt x 294.66656pt.
 ) [3pdfTeX warning (ext4): destination with the same identifier (name{figure.1.
 2}) has been already used, duplicate ignored
 
@@ -1107,15 +1107,15 @@ Overfull \hbox (3.91975pt too wide) in paragraph at lines 73--91
 []$[]$ $[]$ $[]$ 
  []
 
-<./images/trap_4.png, id=227, 597.73312pt x 633.11531pt>
-File: ./images/trap_4.png Graphic file (type png)
-<use ./images/trap_4.png>
-Package pdftex.def Info: ./images/trap_4.png  used on input line 96.
-(pdftex.def)             Requested size: 256.07481pt x 271.22957pt.
-<./images/trap_5.png, id=228, 597.73312pt x 633.11531pt>
+<./images/trap_5.png, id=227, 597.73312pt x 633.11531pt>
 File: ./images/trap_5.png Graphic file (type png)
 <use ./images/trap_5.png>
-Package pdftex.def Info: ./images/trap_5.png  used on input line 102.
+Package pdftex.def Info: ./images/trap_5.png  used on input line 96.
+(pdftex.def)             Requested size: 256.07481pt x 271.22957pt.
+<./images/trap_4.png, id=228, 597.73312pt x 633.11531pt>
+File: ./images/trap_4.png Graphic file (type png)
+<use ./images/trap_4.png>
+Package pdftex.def Info: ./images/trap_4.png  used on input line 102.
 (pdftex.def)             Requested size: 256.07481pt x 271.22957pt.
 
 Overfull \hbox (2.22168pt too wide) in paragraph at lines 94--106
@@ -1186,7 +1186,7 @@ name{figure.1.9}) has been already used, duplicate ignored
                                                   \fi \fi 
 l.147 \end{align*}
                    <./images/trap_1.png> <./images/trap_2.png> <./images/trap_3
-.png> <./images/trap_4.png> <./images/trap_5.png>] [7pdfTeX warning (ext4): des
+.png> <./images/trap_5.png> <./images/trap_4.png>] [7pdfTeX warning (ext4): des
 tination with the same identifier (name{figure.1.10}) has been already used, du
 plicate ignored
 
@@ -1261,27 +1261,27 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.1.16})
                                                   \fi \fi 
 l.41 \newpage
               <./images/cubic_1.png>]
-Overfull \hbox (17.22168pt too wide) in paragraph at lines 78--101
+Overfull \hbox (17.22168pt too wide) in paragraph at lines 83--106
 []$[]$ $[]$ 
  []
 
 <./images/cubic_2.png, id=287, 605.26125pt x 633.11531pt>
 File: ./images/cubic_2.png Graphic file (type png)
 <use ./images/cubic_2.png>
-Package pdftex.def Info: ./images/cubic_2.png  used on input line 106.
+Package pdftex.def Info: ./images/cubic_2.png  used on input line 111.
 (pdftex.def)             Requested size: 256.07481pt x 267.85805pt.
 <./images/cubic_3.png, id=288, 605.26125pt x 633.11531pt>
 File: ./images/cubic_3.png Graphic file (type png)
 <use ./images/cubic_3.png>
-Package pdftex.def Info: ./images/cubic_3.png  used on input line 111.
+Package pdftex.def Info: ./images/cubic_3.png  used on input line 116.
 (pdftex.def)             Requested size: 256.07481pt x 267.85805pt.
 
-Overfull \hbox (2.22168pt too wide) in paragraph at lines 104--114
+Overfull \hbox (2.22168pt too wide) in paragraph at lines 109--119
 []$[]$ $[]$ 
  []
 
-) [10pdfTeX warning (ext4): destination with the same identifier (name{figure.1
-.17}) has been already used, duplicate ignored
+) [10] [11pdfTeX warning (ext4): destination with the same identifier (name{fig
+ure.1.17}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
@@ -1298,12 +1298,12 @@ cubic_3.png>]
 \openout2 = `sections/robotics/assignment4.aux'.
 
  (./sections/robotics/assignment4.tex
-<./images/smooth_1.png, id=298, 605.26125pt x 633.11531pt>
+<./images/smooth_1.png, id=302, 605.26125pt x 633.11531pt>
 File: ./images/smooth_1.png Graphic file (type png)
 <use ./images/smooth_1.png>
 Package pdftex.def Info: ./images/smooth_1.png  used on input line 32.
 (pdftex.def)             Requested size: 409.72125pt x 428.5806pt.
- [11
+ [12
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1.19})
@@ -1313,12 +1313,12 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.1.19})
                                                   \fi \fi 
 l.40 \newpage
               <./images/smooth_1.png>]
-<./images/smooth_2.png, id=305, 1181.91562pt x 643.6547pt>
+<./images/smooth_2.png, id=309, 1181.91562pt x 643.6547pt>
 File: ./images/smooth_2.png Graphic file (type png)
 <use ./images/smooth_2.png>
 Package pdftex.def Info: ./images/smooth_2.png  used on input line 48.
 (pdftex.def)             Requested size: 512.16338pt x 438.75975pt.
-) [12pdfTeX warning (ext4): destination with the same identifier (name{figure.1
+) [13pdfTeX warning (ext4): destination with the same identifier (name{figure.1
 .20}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
@@ -1329,17 +1329,17 @@ l.165 \include{sections/robotics/assignment4}
 
 
 (./sections/robotics/assignment5.tex
-<./images/3Dtraj_ref.png, id=312, 432.86719pt x 414.04688pt>
+<./images/3Dtraj_ref.png, id=316, 432.86719pt x 414.04688pt>
 File: ./images/3Dtraj_ref.png Graphic file (type png)
 <use ./images/3Dtraj_ref.png>
 Package pdftex.def Info: ./images/3Dtraj_ref.png  used on input line 9.
 (pdftex.def)             Requested size: 179.2555pt x 171.45981pt.
-<./images/3Dtraj.png, id=313, 557.83406pt x 614.295pt>
+<./images/3Dtraj.png, id=317, 557.83406pt x 614.295pt>
 File: ./images/3Dtraj.png Graphic file (type png)
 <use ./images/3Dtraj.png>
 Package pdftex.def Info: ./images/3Dtraj.png  used on input line 42.
 (pdftex.def)             Requested size: 204.85672pt x 225.589pt.
-<./images/3Dtraj_pos.png, id=314, 572.1375pt x 566.86781pt>
+<./images/3Dtraj_pos.png, id=318, 572.1375pt x 566.86781pt>
 File: ./images/3Dtraj_pos.png Graphic file (type png)
 <use ./images/3Dtraj_pos.png>
 Package pdftex.def Info: ./images/3Dtraj_pos.png  used on input line 48.
@@ -1348,7 +1348,7 @@ Package pdftex.def Info: ./images/3Dtraj_pos.png  used on input line 48.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<./images/3Dtraj_profiles.png, id=315, 1177.39874pt x 635.37375pt>
+<./images/3Dtraj_profiles.png, id=319, 1177.39874pt x 635.37375pt>
 File: ./images/3Dtraj_profiles.png Graphic file (type png)
 <use ./images/3Dtraj_profiles.png>
 Package pdftex.def Info: ./images/3Dtraj_profiles.png  used on input line 54.
@@ -1356,7 +1356,7 @@ Package pdftex.def Info: ./images/3Dtraj_profiles.png  used on input line 54.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) [13
+) [14
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1.21})
@@ -1373,7 +1373,7 @@ ignored
                                                   \fi \fi 
 l.167 \include{sections/robotics/assignment5}
                                               <./images/3Dtraj_ref.png> <./imag
-es/3dtraj.png>] [14pdfTeX warning (ext4): destination with the same identifier 
+es/3dtraj.png>] [15pdfTeX warning (ext4): destination with the same identifier 
 (name{figure.1.23}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
@@ -1431,7 +1431,7 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 3.
 
-<./images/sphere.png, id=333, 664.73344pt x 621.07031pt>
+<./images/sphere.png, id=338, 664.73344pt x 621.07031pt>
 File: ./images/sphere.png Graphic file (type png)
 <use ./images/sphere.png>
 Package pdftex.def Info: ./images/sphere.png  used on input line 60.
@@ -1439,10 +1439,10 @@ Package pdftex.def Info: ./images/sphere.png  used on input line 60.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) [15
+) [16
 
 
-] [16pdfTeX warning (ext4): destination with the same identifier (name{figure.1
+] [17pdfTeX warning (ext4): destination with the same identifier (name{figure.1
 .25}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
@@ -1453,12 +1453,12 @@ l.169 \include{sections/robotics/assignment6}
 
 
 (./sections/robotics/assignment7.tex
-<./images/scanning.png, id=346, 963.6pt x 561.59813pt>
+<./images/scanning.png, id=350, 963.6pt x 561.59813pt>
 File: ./images/scanning.png Graphic file (type png)
 <use ./images/scanning.png>
 Package pdftex.def Info: ./images/scanning.png  used on input line 11.
 (pdftex.def)             Requested size: 460.93153pt x 268.62999pt.
-) [17
+) [18
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1.26})
@@ -1469,40 +1469,40 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.1.26})
 l.171 \include{sections/robotics/assignment7}
                                               <./images/scanning.png>]
 Chapter 2.
-[18
+[19
 
 
 ]
 \openout2 = `sections/vision/assignment1.aux'.
 
  (./sections/vision/assignment1.tex
-<./images/angel.png, id=358, 499.11469pt x 668.4975pt>
+<./images/angel.png, id=362, 499.11469pt x 668.4975pt>
 File: ./images/angel.png Graphic file (type png)
 <use ./images/angel.png>
 Package pdftex.def Info: ./images/angel.png  used on input line 9.
 (pdftex.def)             Requested size: 179.2555pt x 240.08769pt.
-<./images/angel_sparse.png, id=359, 338.01282pt x 452.4403pt>
+<./images/angel_sparse.png, id=363, 338.01282pt x 452.4403pt>
 File: ./images/angel_sparse.png Graphic file (type png)
 <use ./images/angel_sparse.png>
 Package pdftex.def Info: ./images/angel_sparse.png  used on input line 23.
 (pdftex.def)             Requested size: 106.01227pt x 141.89812pt.
-<./images/angel_dense.png, id=360, 261.22594pt x 502.12593pt>
+<./images/angel_dense.png, id=364, 261.22594pt x 502.12593pt>
 File: ./images/angel_dense.png Graphic file (type png)
 <use ./images/angel_dense.png>
 Package pdftex.def Info: ./images/angel_dense.png  used on input line 26.
 (pdftex.def)             Requested size: 115.23286pt x 221.50307pt.
-<./images/angel_mesh.png, id=361, 277.035pt x 532.99126pt>
+<./images/angel_mesh.png, id=365, 277.035pt x 532.99126pt>
 File: ./images/angel_mesh.png Graphic file (type png)
 <use ./images/angel_mesh.png>
 Package pdftex.def Info: ./images/angel_mesh.png  used on input line 29.
 (pdftex.def)             Requested size: 115.23286pt x 221.69962pt.
-<./images/angel_textured_mesh.png, id=362, 273.27094pt x 506.6428pt>
+<./images/angel_textured_mesh.png, id=366, 273.27094pt x 506.6428pt>
 File: ./images/angel_textured_mesh.png Graphic file (type png)
 <use ./images/angel_textured_mesh.png>
 Package pdftex.def Info: ./images/angel_textured_mesh.png  used on input line 3
 2.
 (pdftex.def)             Requested size: 115.23286pt x 213.6389pt.
-) [19
+) [20
 
 pdfTeX warning (ext4): destination with the same identifier (name{figure.2.1}) 
 has been already used, duplicate ignored
@@ -1522,88 +1522,88 @@ LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 5
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-<./images/meshing.png, id=374, 280.79906pt x 298.11375pt>
+<./images/meshing.png, id=378, 280.79906pt x 298.11375pt>
 File: ./images/meshing.png Graphic file (type png)
 <use ./images/meshing.png>
 Package pdftex.def Info: ./images/meshing.png  used on input line 20.
 (pdftex.def)             Requested size: 61.45544pt x 65.24406pt.
-<./images/1_depth.png, id=375, 642.4pt x 481.8pt>
+<./images/1_depth.png, id=379, 642.4pt x 481.8pt>
 File: ./images/1_depth.png Graphic file (type png)
 <use ./images/1_depth.png>
 Package pdftex.def Info: ./images/1_depth.png  used on input line 28.
 (pdftex.def)             Requested size: 207.41777pt x 155.56125pt.
-<./images/1_rgb.jpg, id=376, 642.4pt x 481.8pt>
+<./images/1_rgb.jpg, id=380, 642.4pt x 481.8pt>
 File: ./images/1_rgb.jpg Graphic file (type jpg)
 <use ./images/1_rgb.jpg>
 Package pdftex.def Info: ./images/1_rgb.jpg  used on input line 31.
 (pdftex.def)             Requested size: 207.41777pt x 155.56125pt.
-<./images/2_2_cloud.png, id=377, 744.53156pt x 457.71pt>
+<./images/2_2_cloud.png, id=381, 744.53156pt x 457.71pt>
 File: ./images/2_2_cloud.png Graphic file (type png)
 <use ./images/2_2_cloud.png>
 Package pdftex.def Info: ./images/2_2_cloud.png  used on input line 37.
 (pdftex.def)             Requested size: 207.41777pt x 127.5084pt.
-<./images/2_2_mesh.png, id=378, 752.8125pt x 503.63156pt>
+<./images/2_2_mesh.png, id=382, 752.8125pt x 503.63156pt>
 File: ./images/2_2_mesh.png Graphic file (type png)
 <use ./images/2_2_mesh.png>
 Package pdftex.def Info: ./images/2_2_mesh.png  used on input line 40.
 (pdftex.def)             Requested size: 207.41777pt x 138.76422pt.
-<./images/2_depth.png, id=379, 642.4pt x 481.8pt>
+<./images/2_depth.png, id=383, 642.4pt x 481.8pt>
 File: ./images/2_depth.png Graphic file (type png)
 <use ./images/2_depth.png>
 Package pdftex.def Info: ./images/2_depth.png  used on input line 50.
 (pdftex.def)             Requested size: 184.3733pt x 138.27748pt.
-<./images/2_rgb.jpg, id=380, 642.4pt x 481.8pt>
+<./images/2_rgb.jpg, id=384, 642.4pt x 481.8pt>
 File: ./images/2_rgb.jpg Graphic file (type jpg)
 <use ./images/2_rgb.jpg>
 Package pdftex.def Info: ./images/2_rgb.jpg  used on input line 53.
 (pdftex.def)             Requested size: 184.3733pt x 138.27748pt.
-<./images/2_1_cloud.png, id=381, 784.43062pt x 594.72188pt>
+<./images/2_1_cloud.png, id=385, 784.43062pt x 594.72188pt>
 File: ./images/2_1_cloud.png Graphic file (type png)
 <use ./images/2_1_cloud.png>
 Package pdftex.def Info: ./images/2_1_cloud.png  used on input line 56.
 (pdftex.def)             Requested size: 184.3733pt x 139.7778pt.
-<./images/2_1_mesh.png, id=382, 784.43062pt x 594.72188pt>
+<./images/2_1_mesh.png, id=386, 784.43062pt x 594.72188pt>
 File: ./images/2_1_mesh.png Graphic file (type png)
 <use ./images/2_1_mesh.png>
 Package pdftex.def Info: ./images/2_1_mesh.png  used on input line 59.
 (pdftex.def)             Requested size: 184.3733pt x 139.7778pt.
- [20
+ [21
 
 
  <./images/meshing.png> <./images/1_depth.png (PNG copy)> <./images/1_rgb.jpg> 
 <./images/2_2_cloud.png> <./images/2_2_mesh.png>]
-<./images/3_depth.png, id=392, 642.4pt x 481.8pt>
+<./images/3_depth.png, id=397, 642.4pt x 481.8pt>
 File: ./images/3_depth.png Graphic file (type png)
 <use ./images/3_depth.png>
 Package pdftex.def Info: ./images/3_depth.png  used on input line 69.
 (pdftex.def)             Requested size: 184.3733pt x 138.27748pt.
-<./images/3_rgb.jpg, id=393, 642.4pt x 481.8pt>
+<./images/3_rgb.jpg, id=398, 642.4pt x 481.8pt>
 File: ./images/3_rgb.jpg Graphic file (type jpg)
 <use ./images/3_rgb.jpg>
 Package pdftex.def Info: ./images/3_rgb.jpg  used on input line 72.
 (pdftex.def)             Requested size: 184.3733pt x 138.27748pt.
-<./images/2_3_cloud.png, id=394, 777.65532pt x 567.62062pt>
+<./images/2_3_cloud.png, id=399, 777.65532pt x 567.62062pt>
 File: ./images/2_3_cloud.png Graphic file (type png)
 <use ./images/2_3_cloud.png>
 Package pdftex.def Info: ./images/2_3_cloud.png  used on input line 75.
 (pdftex.def)             Requested size: 184.3733pt x 134.57744pt.
-<./images/2_3_mesh.png, id=395, 780.66656pt x 567.62062pt>
+<./images/2_3_mesh.png, id=400, 780.66656pt x 567.62062pt>
 File: ./images/2_3_mesh.png Graphic file (type png)
 <use ./images/2_3_mesh.png>
 Package pdftex.def Info: ./images/2_3_mesh.png  used on input line 78.
 (pdftex.def)             Requested size: 184.3733pt x 134.05777pt.
-) [21 <./images/2_depth.png (PNG copy)> <./images/2_rgb.jpg> <./images/2_1_clou
+) [22 <./images/2_depth.png (PNG copy)> <./images/2_rgb.jpg> <./images/2_1_clou
 d.png> <./images/2_1_mesh.png> <./images/3_depth.png (PNG copy)> <./images/3_rg
 b.jpg> <./images/2_3_cloud.png> <./images/2_3_mesh.png>]
 \openout2 = `sections/vision/assignment3.aux'.
 
  (./sections/vision/assignment3.tex
-<./images/canonical.png, id=407, 472.76625pt x 643.6547pt>
+<./images/canonical.png, id=411, 472.76625pt x 643.6547pt>
 File: ./images/canonical.png Graphic file (type png)
 <use ./images/canonical.png>
 Package pdftex.def Info: ./images/canonical.png  used on input line 9.
 (pdftex.def)             Requested size: 358.50317pt x 488.1023pt.
-) [22
+) [23
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{figure.2.2}) 
@@ -1617,22 +1617,22 @@ l.179 \include{sections/vision/assignment3}
 
 
 (./sections/vision/assignment4.tex
-<./images/4_coins_original.png, id=414, 870.25125pt x 599.99156pt>
+<./images/4_coins_original.png, id=418, 870.25125pt x 599.99156pt>
 File: ./images/4_coins_original.png Graphic file (type png)
 <use ./images/4_coins_original.png>
-Package pdftex.def Info: ./images/4_coins_original.png  used on input line 18.
+Package pdftex.def Info: ./images/4_coins_original.png  used on input line 16.
 (pdftex.def)             Requested size: 207.41777pt x 143.003pt.
-<./images/4_coins_shapes.png, id=415, 870.25125pt x 601.4972pt>
+<./images/4_coins_shapes.png, id=419, 870.25125pt x 601.4972pt>
 File: ./images/4_coins_shapes.png Graphic file (type png)
 <use ./images/4_coins_shapes.png>
-Package pdftex.def Info: ./images/4_coins_shapes.png  used on input line 21.
+Package pdftex.def Info: ./images/4_coins_shapes.png  used on input line 19.
 (pdftex.def)             Requested size: 207.41777pt x 143.36186pt.
-<./images/4_coins_labels.png, id=416, 870.25125pt x 601.4972pt>
+<./images/4_coins_labels.png, id=420, 870.25125pt x 601.4972pt>
 File: ./images/4_coins_labels.png Graphic file (type png)
 <use ./images/4_coins_labels.png>
-Package pdftex.def Info: ./images/4_coins_labels.png  used on input line 27.
+Package pdftex.def Info: ./images/4_coins_labels.png  used on input line 25.
 (pdftex.def)             Requested size: 256.07481pt x 176.9904pt.
- [23
+ [24
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{figure.2.3}) 
@@ -1640,31 +1640,31 @@ has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.31 \newpage
+l.29 \newpage
              pdfTeX warning (ext4): destination with the same identifier (name{
 figure.2.4}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.31 \newpage
+l.29 \newpage
               <./images/4_coins_original.png> <./images/4_coins_shapes.png> <./
 images/4_coins_labels.png>]
-<./images/4_nuts_original.png, id=427, 507.39563pt x 679.03688pt>
+<./images/4_nuts_original.png, id=431, 507.39563pt x 679.03688pt>
 File: ./images/4_nuts_original.png Graphic file (type png)
 <use ./images/4_nuts_original.png>
-Package pdftex.def Info: ./images/4_nuts_original.png  used on input line 42.
+Package pdftex.def Info: ./images/4_nuts_original.png  used on input line 40.
 (pdftex.def)             Requested size: 138.28085pt x 185.052pt.
-<./images/4_nuts_shapes.png, id=428, 509.65407pt x 679.78969pt>
+<./images/4_nuts_shapes.png, id=432, 509.65407pt x 679.78969pt>
 File: ./images/4_nuts_shapes.png Graphic file (type png)
 <use ./images/4_nuts_shapes.png>
-Package pdftex.def Info: ./images/4_nuts_shapes.png  used on input line 45.
+Package pdftex.def Info: ./images/4_nuts_shapes.png  used on input line 43.
 (pdftex.def)             Requested size: 138.28085pt x 184.43771pt.
-<./images/4_nuts_labels.png, id=429, 511.15968pt x 679.78969pt>
+<./images/4_nuts_labels.png, id=433, 511.15968pt x 679.78969pt>
 File: ./images/4_nuts_labels.png Graphic file (type png)
 <use ./images/4_nuts_labels.png>
-Package pdftex.def Info: ./images/4_nuts_labels.png  used on input line 48.
+Package pdftex.def Info: ./images/4_nuts_labels.png  used on input line 46.
 (pdftex.def)             Requested size: 138.28085pt x 183.89833pt.
-) [24pdfTeX warning (ext4): destination with the same identifier (name{figure.2
+) [25pdfTeX warning (ext4): destination with the same identifier (name{figure.2
 .5}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
@@ -1676,22 +1676,22 @@ mages/4_nuts_shapes.png> <./images/4_nuts_labels.png>]
 
 
 (./sections/vision/assignment5.tex
-<./images/5_box.png, id=439, 1271.5003pt x 475.7775pt>
+<./images/5_box.png, id=443, 1271.5003pt x 475.7775pt>
 File: ./images/5_box.png Graphic file (type png)
 <use ./images/5_box.png>
 Package pdftex.def Info: ./images/5_box.png  used on input line 11.
 (pdftex.def)             Requested size: 358.50317pt x 134.14603pt.
-<./images/5_box_2d.png, id=440, 2511.3825pt x 629.35126pt>
+<./images/5_box_2d.png, id=444, 2511.3825pt x 629.35126pt>
 File: ./images/5_box_2d.png Graphic file (type png)
 <use ./images/5_box_2d.png>
 Package pdftex.def Info: ./images/5_box_2d.png  used on input line 16.
 (pdftex.def)             Requested size: 460.93153pt x 115.50626pt.
-<./images/5_box_3d.png, id=441, 1222.5675pt x 633.86812pt>
+<./images/5_box_3d.png, id=445, 1222.5675pt x 633.86812pt>
 File: ./images/5_box_3d.png Graphic file (type png)
 <use ./images/5_box_3d.png>
 Package pdftex.def Info: ./images/5_box_3d.png  used on input line 21.
 (pdftex.def)             Requested size: 409.72125pt x 212.42693pt.
- [25
+ [26
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{figure.2.6}) 
@@ -1714,17 +1714,17 @@ figure.2.8}) has been already used, duplicate ignored
 l.25 \newpage
               <./images/5_box.png> <./images/5_box_2d.png> <./images/5_box_3d.p
 ng>]
-<./images/5_box_3d_main.png, id=453, 998.22937pt x 633.86812pt>
+<./images/5_box_3d_main.png, id=457, 998.22937pt x 633.86812pt>
 File: ./images/5_box_3d_main.png Graphic file (type png)
 <use ./images/5_box_3d_main.png>
 Package pdftex.def Info: ./images/5_box_3d_main.png  used on input line 29.
 (pdftex.def)             Requested size: 460.93153pt x 292.68549pt.
-<./images/5_box_3d_ori.png, id=454, 889.82437pt x 641.39626pt>
+<./images/5_box_3d_ori.png, id=458, 889.82437pt x 641.39626pt>
 File: ./images/5_box_3d_ori.png Graphic file (type png)
 <use ./images/5_box_3d_ori.png>
 Package pdftex.def Info: ./images/5_box_3d_ori.png  used on input line 34.
 (pdftex.def)             Requested size: 460.93153pt x 332.24588pt.
- [26pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
+ [27pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
 9}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
@@ -1737,18 +1737,18 @@ figure.2.10}) has been already used, duplicate ignored
                                                   \fi \fi 
 l.38 \newpage
               <./images/5_box_3d_main.png> <./images/5_box_3d_ori.png>]
-<./images/5_box_3d_plane.png, id=463, 1022.31938pt x 632.3625pt>
+<./images/5_box_3d_plane.png, id=468, 1022.31938pt x 632.3625pt>
 File: ./images/5_box_3d_plane.png Graphic file (type png)
 <use ./images/5_box_3d_plane.png>
 Package pdftex.def Info: ./images/5_box_3d_plane.png  used on input line 42.
 (pdftex.def)             Requested size: 460.93153pt x 285.11049pt.
-<./images/5_box_3d_bound.png, id=464, 1049.42062pt x 627.84563pt>
+<./images/5_box_3d_bound.png, id=469, 1049.42062pt x 627.84563pt>
 File: ./images/5_box_3d_bound.png Graphic file (type png)
 <use ./images/5_box_3d_bound.png>
 Package pdftex.def Info: ./images/5_box_3d_bound.png  used on input line 47.
 (pdftex.def)             Requested size: 460.93153pt x 275.76434pt.
 
-[27pdfTeX warning (ext4): destination with the same identifier (name{figure.2.1
+[28pdfTeX warning (ext4): destination with the same identifier (name{figure.2.1
 1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
@@ -1761,23 +1761,23 @@ figure.2.12}) has been already used, duplicate ignored
                                                   \fi \fi 
 l.51 \newpage
               <./images/5_box_3d_plane.png> <./images/5_box_3d_bound.png>]
-<./images/5_stop.png, id=474, 1267.73625pt x 472.76625pt>
+<./images/5_stop.png, id=478, 1267.73625pt x 472.76625pt>
 File: ./images/5_stop.png Graphic file (type png)
 <use ./images/5_stop.png>
 Package pdftex.def Info: ./images/5_stop.png  used on input line 57.
 (pdftex.def)             Requested size: 358.50317pt x 133.69377pt.
-<./images/5_stop_2d.png, id=475, 2511.3825pt x 630.85687pt>
+<./images/5_stop_2d.png, id=479, 2511.3825pt x 630.85687pt>
 File: ./images/5_stop_2d.png Graphic file (type png)
 <use ./images/5_stop_2d.png>
 Package pdftex.def Info: ./images/5_stop_2d.png  used on input line 62.
 (pdftex.def)             Requested size: 460.93153pt x 115.78258pt.
-<./images/5_stop_3d.png, id=476, 909.3975pt x 638.385pt>
+<./images/5_stop_3d.png, id=480, 909.3975pt x 638.385pt>
 File: ./images/5_stop_3d.png Graphic file (type png)
 <use ./images/5_stop_3d.png>
 Package pdftex.def Info: ./images/5_stop_3d.png  used on input line 67.
 (pdftex.def)             Requested size: 409.72125pt x 287.62126pt.
 
-[28pdfTeX warning (ext4): destination with the same identifier (name{figure.2.1
+[29pdfTeX warning (ext4): destination with the same identifier (name{figure.2.1
 3}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
@@ -1797,17 +1797,17 @@ figure.2.15}) has been already used, duplicate ignored
 l.71 \newpage
               <./images/5_stop.png> <./images/5_stop_2d.png> <./images/5_stop_3
 d.png>]
-<./images/5_stop_3d_main.png, id=488, 1063.72406pt x 640.64343pt>
+<./images/5_stop_3d_main.png, id=492, 1063.72406pt x 640.64343pt>
 File: ./images/5_stop_3d_main.png Graphic file (type png)
 <use ./images/5_stop_3d_main.png>
 Package pdftex.def Info: ./images/5_stop_3d_main.png  used on input line 75.
 (pdftex.def)             Requested size: 460.93153pt x 277.60234pt.
-<./images/5_stop_3d_ori.png, id=489, 1082.54437pt x 626.34pt>
+<./images/5_stop_3d_ori.png, id=493, 1082.54437pt x 626.34pt>
 File: ./images/5_stop_3d_ori.png Graphic file (type png)
 <use ./images/5_stop_3d_ori.png>
 Package pdftex.def Info: ./images/5_stop_3d_ori.png  used on input line 80.
 (pdftex.def)             Requested size: 460.93153pt x 266.68317pt.
- [29pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
+ [30pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
 16}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
@@ -1820,18 +1820,18 @@ figure.2.17}) has been already used, duplicate ignored
                                                   \fi \fi 
 l.84 \newpage
               <./images/5_stop_3d_main.png> <./images/5_stop_3d_ori.png>]
-<./images/5_stop_3d_plane.png, id=498, 1201.48875pt x 655.69969pt>
+<./images/5_stop_3d_plane.png, id=502, 1201.48875pt x 655.69969pt>
 File: ./images/5_stop_3d_plane.png Graphic file (type png)
 <use ./images/5_stop_3d_plane.png>
 Package pdftex.def Info: ./images/5_stop_3d_plane.png  used on input line 88.
 (pdftex.def)             Requested size: 460.93153pt x 251.5497pt.
-<./images/5_stop_3d_bound.png, id=499, 918.43124pt x 636.87938pt>
+<./images/5_stop_3d_bound.png, id=503, 918.43124pt x 636.87938pt>
 File: ./images/5_stop_3d_bound.png Graphic file (type png)
 <use ./images/5_stop_3d_bound.png>
 Package pdftex.def Info: ./images/5_stop_3d_bound.png  used on input line 93.
 (pdftex.def)             Requested size: 460.93153pt x 319.63422pt.
 )
-[30pdfTeX warning (ext4): destination with the same identifier (name{figure.2.1
+[31pdfTeX warning (ext4): destination with the same identifier (name{figure.2.1
 8}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
@@ -1849,12 +1849,12 @@ mages/5_stop_3d_bound.png>]
 \openout2 = `sections/vision/assignment6.aux'.
 
  (./sections/vision/assignment6.tex
-<./images/angelref.jpg, id=509, 963.6pt x 1284.8pt>
+<./images/angelref.jpg, id=513, 963.6pt x 1284.8pt>
 File: ./images/angelref.jpg Graphic file (type jpg)
 <use ./images/angelref.jpg>
 Package pdftex.def Info: ./images/angelref.jpg  used on input line 18.
 (pdftex.def)             Requested size: 256.07481pt x 341.431pt.
- [31
+ [32
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{figure.2.20})
@@ -1864,66 +1864,66 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.2.20})
                                                   \fi \fi 
 l.22 \newpage
               <./images/angelref.jpg>]
-<./images/55.png, id=516, 510.40688pt x 679.03688pt>
+<./images/55.png, id=520, 510.40688pt x 679.03688pt>
 File: ./images/55.png Graphic file (type png)
 <use ./images/55.png>
 Package pdftex.def Info: ./images/55.png  used on input line 29.
 (pdftex.def)             Requested size: 207.41777pt x 275.9513pt.
-<./images/57.png, id=517, 510.40688pt x 679.78969pt>
+<./images/57.png, id=521, 510.40688pt x 679.78969pt>
 File: ./images/57.png Graphic file (type png)
 <use ./images/57.png>
 Package pdftex.def Info: ./images/57.png  used on input line 32.
 (pdftex.def)             Requested size: 207.41777pt x 276.25723pt.
-<./images/58.png, id=518, 510.40688pt x 679.03688pt>
+<./images/58.png, id=522, 510.40688pt x 679.03688pt>
 File: ./images/58.png Graphic file (type png)
 <use ./images/58.png>
 Package pdftex.def Info: ./images/58.png  used on input line 39.
 (pdftex.def)             Requested size: 207.41777pt x 275.9513pt.
-<./images/59.png, id=519, 510.40688pt x 679.78969pt>
+<./images/59.png, id=523, 510.40688pt x 679.78969pt>
 File: ./images/59.png Graphic file (type png)
 <use ./images/59.png>
 Package pdftex.def Info: ./images/59.png  used on input line 42.
 (pdftex.def)             Requested size: 207.41777pt x 276.25723pt.
- [32 <./images/55.png> <./images/57.png> <./images/58.png> <./images/59.png>]
-<./images/60.png, id=528, 510.40688pt x 679.03688pt>
+ [33 <./images/55.png> <./images/57.png> <./images/58.png> <./images/59.png>]
+<./images/60.png, id=533, 510.40688pt x 679.03688pt>
 File: ./images/60.png Graphic file (type png)
 <use ./images/60.png>
 Package pdftex.def Info: ./images/60.png  used on input line 51.
 (pdftex.def)             Requested size: 207.41777pt x 275.9513pt.
-<./images/61.png, id=529, 510.40688pt x 679.03688pt>
+<./images/61.png, id=534, 510.40688pt x 679.03688pt>
 File: ./images/61.png Graphic file (type png)
 <use ./images/61.png>
 Package pdftex.def Info: ./images/61.png  used on input line 54.
 (pdftex.def)             Requested size: 207.41777pt x 275.9513pt.
-<./images/62.png, id=530, 510.40688pt x 679.03688pt>
+<./images/62.png, id=535, 510.40688pt x 679.03688pt>
 File: ./images/62.png Graphic file (type png)
 <use ./images/62.png>
 Package pdftex.def Info: ./images/62.png  used on input line 61.
 (pdftex.def)             Requested size: 207.41777pt x 275.9513pt.
-<./images/63.png, id=531, 510.40688pt x 679.03688pt>
+<./images/63.png, id=536, 510.40688pt x 679.03688pt>
 File: ./images/63.png Graphic file (type png)
 <use ./images/63.png>
 Package pdftex.def Info: ./images/63.png  used on input line 64.
 (pdftex.def)             Requested size: 207.41777pt x 275.9513pt.
- [33 <./images/60.png> <./images/61.png> <./images/62.png> <./images/63.png>]
-<./images/109.png, id=541, 510.40688pt x 679.03688pt>
+ [34 <./images/60.png> <./images/61.png> <./images/62.png> <./images/63.png>]
+<./images/109.png, id=545, 510.40688pt x 679.03688pt>
 File: ./images/109.png Graphic file (type png)
 <use ./images/109.png>
 Package pdftex.def Info: ./images/109.png  used on input line 73.
 (pdftex.def)             Requested size: 207.41777pt x 275.9513pt.
-<./images/110.png, id=542, 510.40688pt x 679.03688pt>
+<./images/110.png, id=546, 510.40688pt x 679.03688pt>
 File: ./images/110.png Graphic file (type png)
 <use ./images/110.png>
 Package pdftex.def Info: ./images/110.png  used on input line 76.
 (pdftex.def)             Requested size: 207.41777pt x 275.9513pt.
- [34 <./images/109.png> <./images/110.png>]
-<./images/poses.png, id=549, 671.50874pt x 623.32875pt>
+ [35 <./images/109.png> <./images/110.png>]
+<./images/poses.png, id=553, 671.50874pt x 623.32875pt>
 File: ./images/poses.png Graphic file (type png)
 <use ./images/poses.png>
 Package pdftex.def Info: ./images/poses.png  used on input line 86.
 (pdftex.def)             Requested size: 460.93153pt x 427.86217pt.
 )
-[35 <./images/poses.png>]
+[36 <./images/poses.png>]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 187.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 187.
  (./rvc_report_Busellato.aux
@@ -1941,9 +1941,9 @@ Package rerunfilecheck Info: File `rvc_report_Busellato.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 187.
  ) 
 Here is how much of TeX's memory you used:
- 21944 strings out of 481239
- 395459 string characters out of 5920377
- 668087 words of memory out of 5000000
+ 21945 strings out of 481239
+ 395466 string characters out of 5920377
+ 668099 words of memory out of 5000000
  36549 multiletter control sequences out of 15000+600000
  551339 words of font info for 73 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1971,10 +1971,10 @@ per/sfbx2074.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2488.pfb></u
 sr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts
 /type1/public/cm-super/sfrm2074.pfb></usr/share/texmf/fonts/type1/public/cm-sup
 er/sftt1000.pfb>
-Output written on rvc_report_Busellato.pdf (39 pages, 20892506 bytes).
+Output written on rvc_report_Busellato.pdf (40 pages, 20893271 bytes).
 PDF statistics:
- 665 PDF objects out of 1000 (max. 8388607)
- 446 compressed objects within 5 object streams
- 121 named destinations out of 1000 (max. 500000)
+ 669 PDF objects out of 1000 (max. 8388607)
+ 449 compressed objects within 5 object streams
+ 122 named destinations out of 1000 (max. 500000)
  651 words of extra memory for PDF output out of 10000 (max. 10000000)
 
