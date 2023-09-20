@@ -20,7 +20,7 @@ Fixing velocities on all path points yields:
 a_0^k&=q_k\\
 a_1^k&=\dot q_k\\
 a_2^k&=\frac{1}{T_k}\left(\frac{3(q_{k+1}-q_k)}{T_k}-2\dot q_k-\dot q_{k+1}\right)\\
-a_3^k&=\frac{1}{T_k^2}\left(\frac{^2(q_{k}-q_{k+1})}{T_k}+\dot q_k+\dot q_{k+1}\right)\\
+a_3^k&=\frac{1}{T_k^2}\left(\frac{2(q_{k}-q_{k+1})}{T_k}+\dot q_k+\dot q_{k+1}\right)\\
 \end{cases}
 \end{equation*}
 
@@ -28,9 +28,9 @@ where $T_k=t_{k+1}-t_k$.
 
 \begin{figure}[h]
 \centering
-\includegraphics[keepaspectratio,width=0.7\textwidth]{cubic_1}
+\includegraphics[keepaspectratio,width=\textwidth]{cubic_1}
 \caption{Trajectory through $q_k=\begin{bmatrix}
-10 & 20 & 0 & 30 & 40
+10 & 20 & 30 & 0 & 40
 \end{bmatrix}$ at times $t_k=\begin{bmatrix}
 0 & 2 & 4 & 8 & 10
 \end{bmatrix}$ with \\velocities $\dot q_k=\begin{bmatrix}
@@ -38,24 +38,31 @@ where $T_k=t_{k+1}-t_k$.
 \end{bmatrix}$}
 \end{figure}
 
-\newpage
-
-\subsection{Interpolating polynomials with continuous accelerations at path points and imposed velocity at initial/final points (+ Thomas algorithm)}
-
 Path point velocities are not generally known. We can estimate them with Euler's approximation:
 
 \begin{equation*}
 v_k = \frac{q_k-q_{k-1}}{t_k-t_{k-1}}\implies\begin{cases}
 \dot q(t_0)&=\dot q_0\\
 \dot q(t_k)&=\begin{cases}
-0 & \text{if }sign(\Delta Q_k)\neq sign(v_{k+1})\\
+0 & \text{if }sign(v_k)\neq sign(v_{k+1})\\
 \frac{v_k+v_{k+1}}{2} &  \text{if }sign(v_k) =  sign(v_{k+1})\\
 \end{cases}\\
 \dot q(t_n) &= \dot q_n
 \end{cases}
 \end{equation*}
 
-Imposing acceleration continuity at path points results in the definition of a linear system $A\dot q=c$, where $A$ is a tridiagonal matrix. Thanks to this property the system can be solved for $\dot q$ efficiently using Thomas' algorithm. Given:
+\begin{figure}[h]
+\centering
+\includegraphics[keepaspectratio,width=\textwidth]{cubic_2}
+\caption{Trajectory interpolation with Euler's approximation.}
+\end{figure}
+
+\newpage
+
+\subsection{Interpolating polynomials with continuous accelerations at path points and imposed velocity at initial/final points (+ Thomas algorithm)}
+
+
+Imposing velocity and acceleration continuity at path points results in the definition of a linear system $A\dot q=c$, where $A$ is a tridiagonal matrix. Thanks to this property the system can be solved for $\dot q$ efficiently using Thomas' algorithm. Given:
 
 \begin{equation*}
 \begin{bmatrix}
@@ -106,14 +113,7 @@ Backward substitution:
 
 
 \begin{figure}[H]
-\begin{minipage}{0.5\textwidth}
-\centering
-\includegraphics[keepaspectratio,width=\textwidth]{cubic_2}
-\caption{Trajectory interpolation with Euler's approximation.}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
 \centering
 \includegraphics[keepaspectratio,width=\textwidth]{cubic_3}
 \caption{Trajectory interpolation with continuous accelerations.}
-\end{minipage}
 \end{figure}
