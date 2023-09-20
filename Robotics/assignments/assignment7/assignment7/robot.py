@@ -60,7 +60,7 @@ class Robot(Node):
         # This will hold the current pose of the robot
         self.pose = None
         # Set up the control loop
-        self.control_frequency = 100 # Hz
+        self.control_frequency = 50 # Hz
         self.dt = 1 / self.control_frequency # s
         self.create_timer(timer_period_sec=self.dt, callback=self.control_loop)
         # Trajectory planner
@@ -91,9 +91,9 @@ class Robot(Node):
                 self.log('Generating the pick and place trajectories...')
                 self.pnp_traj = []
                 for i, keys in enumerate(zip(self.cube_locations.keys(), self.cube_destinations.keys())):
-                    self.pnp_traj.append(self.generate_pnp_task(self.cube_locations[keys[0]], self.pnp_orientations[i]))
+                    self.pnp_traj.append(self.generate_pick_task(self.cube_locations[keys[0]], self.pnp_orientations[i]))
                     self.pnp_traj.append(self.generate_homing_task(self.pnp_traj[-1][-1]))
-                    self.pnp_traj.append(self.generate_pnp_task(self.cube_destinations[keys[1]], self.pnp_orientations[i]))
+                    self.pnp_traj.append(self.generate_place_task(self.cube_destinations[keys[1]], self.pnp_orientations[i]))
                     self.pnp_traj.append(self.generate_homing_task(self.pnp_traj[-1][-1])) 
             else:
                 self.moveTo(self.scanning_traj.pop(0))
@@ -165,10 +165,17 @@ class Robot(Node):
 
         return q + q1 + q2 + q3 + q4 + q5 + q6
 
-    def generate_homing_task(self, starting_pose, duration=2):
+    def generate_homing_task(self, starting_pose: PoseStamped, duration=2):
         # Move away from the pick/place spot
         approach_pose = copy.deepcopy(starting_pose)
-        approach_pose.pose.position.z += self.cube_height
+        target_orientation = approach_pose.pose.orientation
+        # Compute the approach pose
+        ori = np.array([target_orientation.x,target_orientation.y,target_orientation.z,target_orientation.w])
+        approach_axis = self.planner.quaternion_to_rotation_matrix(ori)[:,2]
+        displacement = approach_axis*2*self.cube_height
+        approach_pose.pose.position.x -= displacement[0]
+        approach_pose.pose.position.y -= displacement[1]
+        approach_pose.pose.position.z -= displacement[2]
         t, u = self.planner.linear_polynomial(0, duration, 0, 1)
         q = self.planner.rectilinear_motion_primitive(u, starting_pose, approach_pose)
         # Homing
@@ -178,9 +185,28 @@ class Robot(Node):
         q = q + q1
         return q
     
-    def generate_pnp_task(self, target_position, target_orientation, duration=2):
+    def generate_pick_task(self, target_position: Point, target_orientation: Quaternion, duration=2):
         target_pose = PoseStamped(pose=Pose(position=target_position,orientation=target_orientation))
+        approach_pose = copy.deepcopy(target_pose)
+        # Compute the approach pose
+        ori = np.array([target_orientation.x,target_orientation.y,target_orientation.z,target_orientation.w])
+        approach_axis = self.planner.quaternion_to_rotation_matrix(ori)[:,2]
+        displacement = approach_axis*2*self.cube_height
+        approach_pose.pose.position.x -= displacement[0]
+        approach_pose.pose.position.y -= displacement[1]
+        approach_pose.pose.position.z -= displacement[2]
+        # Linear motion to the approach pose
+        t, u = self.planner.linear_polynomial(0, duration, 0, 1)
+        q1 = self.planner.rectilinear_motion_primitive(u, self.HOME, approach_pose)
         # Linear motion to the pick pose
+        _, u = self.planner.linear_polynomial(t[-1], t[-1] + duration, 0, 1)
+        q2 = self.planner.rectilinear_motion_primitive(u, q1[-1], target_pose)
+
+        return q1 + q2
+    
+    def generate_place_task(self, target_position: Point, target_orientation: Quaternion, duration=2):
+        target_pose = PoseStamped(pose=Pose(position=target_position,orientation=target_orientation))
+        # Linear motion to the place pose
         _, u = self.planner.linear_polynomial(0, duration, 0, 1)
         q = self.planner.rectilinear_motion_primitive(u, self.HOME, target_pose)
 
