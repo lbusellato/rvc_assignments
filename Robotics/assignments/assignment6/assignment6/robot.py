@@ -1,4 +1,3 @@
-import copy
 import numpy as np
 
 from rclpy.node import Node
@@ -23,7 +22,7 @@ class Robot(Node):
         # These will hold the current pose and joint state of the robot
         self.pose = None
         # Set up the control loop
-        self.control_frequency = 100 #Hz
+        self.control_frequency = 50 #Hz
         self.dt = 1 / self.control_frequency
         self.create_timer(timer_period_sec=self.dt, callback=self.control_loop)
         # Trajectory planner
