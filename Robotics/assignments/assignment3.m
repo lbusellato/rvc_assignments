@@ -14,7 +14,7 @@ close all;
 addpath(genpath('../common/'));
 
 %% CUBIC SPLINES W/ INITIAL|PATH|FINAL VELOCITIES
-qk = [10 20 0 30 40]; % Path points
+qk = [10 20 30 0 40]; % Path points
 tk = [0 2 4 8 10]; % Times
 dqk = [0 0 0 5.2 0]; % Path point velocities
 
@@ -29,7 +29,7 @@ subplot(414); plot(t, j,'Marker','o','MarkerIndices',m,'MarkerEdgeColor','r','Li
 sgtitle("CUBIC SPLINES WITH GIVEN INITIAL|PATH|FINAL VELOCITIES");
 
 %% CUBIC SPLINES W/ INITIAL|FINAL VELOCITIES
-qk = [10 20 0 30 40]; % Path points
+qk = [10 20 30 0 40]; % Path points
 tk = [0 2 4 8 10]; % Times
 dqk = [0 0]; % Path point velocities
 
@@ -44,7 +44,7 @@ subplot(414); plot(t, j,'Marker','o','MarkerIndices',m,'MarkerEdgeColor','r','Li
 sgtitle("CUBIC SPLINES WITH GIVEN INITIAL|FINAL VELOCITIES");
 
 %% CUBIC SPLINES W/ INITIAL|FINAL VELOCITIES AND CONTINUOUS ACCELERATIONS
-qk = [10 20 0 30 40]; % Path points
+qk = [10 20 30 0 40]; % Path points
 tk = [0 2 4 8 10]; % Times
 dqk = [0 0];
 
