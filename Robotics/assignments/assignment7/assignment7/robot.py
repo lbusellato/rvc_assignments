@@ -25,13 +25,15 @@ class Robot(Node):
                             self.YELLOW : 'yellow'}
 
         # Some known waypoints
-        self.HOME = PoseStamped(pose=Pose(position=Point(x=0.484, y=0.128, z=0.609), orientation=Quaternion(x=0.5, y=0.5, z=0.5, w=0.5)))
-        self.SCAN_START = PoseStamped(pose=Pose(position=Point(x=-0.129, y=0.487, z=0.422), orientation=Quaternion(x=0.0, y=1.0, z=0.0, w=0.0)))
+        self.HOME = PoseStamped(pose=Pose(position=Point(x=0.629, y=0.128, z=0.609), orientation=Quaternion(x=0.5, y=0.5, z=0.5, w=0.5)))
+        self.SCAN_START = PoseStamped(pose=Pose(position=Point(x=-0.129, y=0.487, z=0.322), orientation=Quaternion(x=0.0, y=1.0, z=0.0, w=0.0)))
 
         # Different orientations for pick and place
         ORI1 = Quaternion(x=np.sqrt(2)/2,y=np.sqrt(2)/2,z=0.0,w=0.0)
-        ORI2 = Quaternion(x=1.0,y=0.0,z=0.0,w=0.0)
-        self.pnp_orientations = [ORI1, ORI2, ORI1, ORI2]
+        ORI2 = Quaternion(x=0.9237407521665219,y=-0.0019492497995984462,z=-0.0015902920370719396,w=-0.38301004449398485)
+        ORI3 = Quaternion(x=1.0,y=0.0,z=0.0,w=0.0)
+        ORI4 = Quaternion(x=0.694295580863192,y=0.6910430104424575,z=0.14322566563246308,w=0.14106598745483104)
+        self.pnp_orientations = [ORI1, ORI2, ORI3, ORI4]
 
         self.cube_locations = {self.RED    : None,
                                self.GREEN  : None,
@@ -48,7 +50,6 @@ class Robot(Node):
         # Create the publisher for the gripper control topic
         self.gripper_control_pub_ = self.create_publisher(Bool, '/wsg_50/controller/command', 1)
         # Create the subscribers to the pose/joint state topics
-        self.op_pose_sub_ = self.create_subscription(PoseStamped, '/ur5/ee_actual/pose', self.pose_update, 1)
         self.gripper_sub_ = self.create_subscription(JointState, '/joint_states', self.gripper_state_update, 1)
         # Create the subscribers for the cube locations and destinations topics
         self.cube_subs_ = []
@@ -57,8 +58,6 @@ class Robot(Node):
             self.cube_subs_.append(sub)
             sub = self.create_subscription(PoseStamped, '/dest_cube_' + val + '/pose', self.cube_callback(key, self.cube_destinations, 'destination'), 10)
             self.cube_subs_.append(sub)
-        # This will hold the current pose of the robot
-        self.pose = None
         # Set up the control loop
         self.control_frequency = 50 # Hz
         self.dt = 1 / self.control_frequency # s
@@ -80,6 +79,7 @@ class Robot(Node):
         self.gripper_target_state = self.GRIPPER_OPEN
         # Offset for place
         self.cube_height = 0.05
+        self.approach_offset = 3*self.cube_height
         self.log('Beginning scan for cube locations and destinations...')
 
     def control_loop(self):
@@ -118,6 +118,15 @@ class Robot(Node):
     #-------------------------------------------------------------------------------------------------------------------
 
     def moveTo(self, target_pose):
+        # Account for the fact that the ee target is not the gripper's center
+        target_orientation = target_pose.pose.orientation
+        # Compute the approach pose
+        ori = np.array([target_orientation.x,target_orientation.y,target_orientation.z,target_orientation.w])
+        approach_axis = self.planner.quaternion_to_rotation_matrix(ori)[:,2]
+        displacement = approach_axis*0.145
+        target_pose.pose.position.x -= displacement[0]
+        target_pose.pose.position.y -= displacement[1]
+        target_pose.pose.position.z -= displacement[2]
         self.op_target_pub_.publish(target_pose)
 
     #-------------------------------------------------------------------------------------------------------------------
@@ -168,14 +177,7 @@ class Robot(Node):
     def generate_homing_task(self, starting_pose: PoseStamped, duration=2):
         # Move away from the pick/place spot
         approach_pose = copy.deepcopy(starting_pose)
-        target_orientation = approach_pose.pose.orientation
-        # Compute the approach pose
-        ori = np.array([target_orientation.x,target_orientation.y,target_orientation.z,target_orientation.w])
-        approach_axis = self.planner.quaternion_to_rotation_matrix(ori)[:,2]
-        displacement = approach_axis*2*self.cube_height
-        approach_pose.pose.position.x -= displacement[0]
-        approach_pose.pose.position.y -= displacement[1]
-        approach_pose.pose.position.z -= displacement[2]
+        approach_pose.pose.position.z += self.approach_offset
         t, u = self.planner.linear_polynomial(0, duration, 0, 1)
         q = self.planner.rectilinear_motion_primitive(u, starting_pose, approach_pose)
         # Homing
@@ -186,15 +188,9 @@ class Robot(Node):
         return q
     
     def generate_pick_task(self, target_position: Point, target_orientation: Quaternion, duration=2):
-        target_pose = PoseStamped(pose=Pose(position=target_position,orientation=target_orientation))
-        approach_pose = copy.deepcopy(target_pose)
-        # Compute the approach pose
-        ori = np.array([target_orientation.x,target_orientation.y,target_orientation.z,target_orientation.w])
-        approach_axis = self.planner.quaternion_to_rotation_matrix(ori)[:,2]
-        displacement = approach_axis*2*self.cube_height
-        approach_pose.pose.position.x -= displacement[0]
-        approach_pose.pose.position.y -= displacement[1]
-        approach_pose.pose.position.z -= displacement[2]
+        approach_pose = PoseStamped(pose=Pose(position=target_position,orientation=target_orientation))
+        target_pose = copy.deepcopy(approach_pose)
+        target_pose.pose.position.z -= self.approach_offset
         # Linear motion to the approach pose
         t, u = self.planner.linear_polynomial(0, duration, 0, 1)
         q1 = self.planner.rectilinear_motion_primitive(u, self.HOME, approach_pose)
@@ -206,9 +202,11 @@ class Robot(Node):
     
     def generate_place_task(self, target_position: Point, target_orientation: Quaternion, duration=2):
         target_pose = PoseStamped(pose=Pose(position=target_position,orientation=target_orientation))
-        # Linear motion to the place pose
+        approach_pose = copy.deepcopy(target_pose)
+        approach_pose.pose.position.z -= self.approach_offset
+        # Linear motion to the approach pose
         _, u = self.planner.linear_polynomial(0, duration, 0, 1)
-        q = self.planner.rectilinear_motion_primitive(u, self.HOME, target_pose)
+        q = self.planner.rectilinear_motion_primitive(u, self.HOME, approach_pose)
 
         return q
     
@@ -227,9 +225,6 @@ class Robot(Node):
     #   Callbacks for the various topics the node subscribes to
     #
     #-------------------------------------------------------------------------------------------------------------------
-
-    def pose_update(self, data):
-        self.pose = data
 
     def gripper_state_update(self, data):
         gripper_span = data.position[-1] - data.position[-2]
