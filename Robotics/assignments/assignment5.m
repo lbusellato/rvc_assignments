@@ -1,4 +1,4 @@
-0%--------------------------------------------------------------------------
+%--------------------------------------------------------------------------
 %
 %   assignment5.m: 3D trajectory
 %
@@ -37,16 +37,16 @@ P1 = [ 0 1 1.9 2 2 2 2;
 %% MOTION PRIMITIVES
 % For each primitive generate the parameter u and its derivatives by linear
 % interpolation, then generate the motion primitive itself.
-[t1,u1,uD1,uDD1,dddu1] = linearPoly(ts,ti,dt+ti,0,1);
+[t1,u1,uD1,uDD1,dddu1] = generateParameter(ts,ti,dt+ti,0,1,0,0);
 [p1, v1, a1, j1] = rectilinear(u1, uD1, uDD1, dddu1, P(:,1), P(:,2));
 
-[t2,u2,uD2,uDD2,dddu2] = linearPoly(ts,t1(end),t1(end)+dt,0,pi/2);
+[t2,u2,uD2,uDD2,dddu2] = generateParameter(ts,t1(end),t1(end)+dt,0,pi/2,0,0);
 [p2, v2, a2, j2] = circular(u2, uD2, uDD2, dddu2, P(:,2), [1 1 0]', [0 0 1]');
 
-[t3,u3,uD3,uDD3,dddu3] = linearPoly(ts,t2(end),t2(end)+dt,0,pi);
+[t3,u3,uD3,uDD3,dddu3] = generateParameter(ts,t2(end),t2(end)+dt,0,pi,0,0);
 [p3, v3, a3, j3] = circular(u3, uD3, uDD3, dddu3, P(:,3), [2 1 1]', [1 0 0]');
 
-[t4,u4,uD4,uDD4,dddu4] = linearPoly(ts,t3(end),t3(end)+dt,0,1);
+[t4,u4,uD4,uDD4,dddu4] = generateParameter(ts,t3(end),t3(end)+dt,0,1,0,0);
 [p4, v4, a4, j4] = rectilinear(u4, uD4, uDD4, dddu4, P(:,4), P(:,5));
 
 %% 3D PLOT THE TRAJECTORY
