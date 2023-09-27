@@ -25,14 +25,14 @@ function [q,v,a,t] = generateTrapezoidal(ti, tf, qi, qf, tc, vc, ac, dqi, dqf, a
             tf = (vc^2+ac*(qf-qi))/(vc*ac) + ti;
             dqc = vc; ddqc = ac; ta = tc; td = tc; dqi = 0; dqf = 0;
         else
-            argCheck = true; msg = ": ddqc and dqc must be different than zero."
+            argCheck = true; msg = ": ddqc and dqc must be different than zero.";
         end
     elseif ~isnan(tc) % tc fixed
         if tc <= (tf-ti) / 2
             ddqc = (qf-qi)/(tc*(tf-ti)-tc*tc);
             dqc = ddqc*tc; ta = tc; td = tc; dqi = 0; dqf = 0;
         else
-            argCheck = true; msg = ": tc must be less than (tf-ti)/2."
+            argCheck = true; msg = ": tc must be less than (tf-ti)/2.";
         end
     elseif ~isnan(vc) % dqc fixed
         vc = sign(qf-qi)*vc; % Handle qf < qi case
@@ -41,7 +41,7 @@ function [q,v,a,t] = generateTrapezoidal(ti, tf, qi, qf, tc, vc, ac, dqi, dqf, a
             ddqc = vc / tc;
             dqc = vc; ta = tc; td = tc; dqi = 0; dqf = 0;
         else
-            argCheck = true; msg = ": tc must be less than (tf-ti)/2."
+            argCheck = true; msg = ": tc must be less than (tf-ti)/2.";
         end
     elseif ~isnan(ac) % ddqc fixed
         ac = sign(qf-qi)*ac;  % Handle qf < qi case
@@ -52,16 +52,16 @@ function [q,v,a,t] = generateTrapezoidal(ti, tf, qi, qf, tc, vc, ac, dqi, dqf, a
                 dqc = ac * tc;
                 ddqc = ac; ta=tc; td = tc; dqi = 0; dqf = 0;
             else
-                argCheck = true; msg = ": tc must be less than (tf-ti)/2."
+                argCheck = true; msg = ": tc must be less than (tf-ti)/2.";
             end
         else
-            argCheck = true; msg = ": sqrt argument must be greater than zero."
+            argCheck = true; msg = ": line 48 sqrt argument must be greater than zero.";
         end
     elseif ~isnan(dqi) && ~isnan(dqf) % dqi,dqf fixed
         if qf - qi < 0 
             % If dq < 0, invert the signs of initial vel/pos and after flip
             % the resulting trajectories
-            dqi = -dqi; dqf = -dqf; qi = -qi; qf = -qf; sgn = -1;
+            qi = -qi; qf = -qf; sgn = -1; dqi = -dqi; dqf = -dqf;
         end
         if ~isnan(vm) && ~isnan(am) % ddqc, dqc max fixed
             if am*(qf-qi) > abs(dqi^2-dqf^2)*0.5 % Feasibility check
@@ -77,7 +77,7 @@ function [q,v,a,t] = generateTrapezoidal(ti, tf, qi, qf, tc, vc, ac, dqi, dqf, a
                     ta = (dqc-dqi)/am; td = (dqc-dqf)/am; tf = ta + td + ti;
                 end
             else
-                argCheck = true; msg = ": ddqc max is not feasible."
+                argCheck = true; msg = ": ddqc max is not feasible.";
             end
         elseif ~isnan(am) % ddqc max fixed
             if am*(qf-qi) > abs(dqi^2-dqf^2)*0.5 % Feasibility check
@@ -87,14 +87,14 @@ function [q,v,a,t] = generateTrapezoidal(ti, tf, qi, qf, tc, vc, ac, dqi, dqf, a
                     ddqc = am;
                     ta = (dqc-dqi)/am; td = (dqc-dqf)/am;
                 else
-                    argCheck = true; msg = ": sqrt argument must be greater than zero."
+                    argCheck = true; msg = ": line 84 sqrt argument must be greater than zero.";
                 end
             else
-                argCheck = true; msg = ": ddqc max is not feasible."
+                argCheck = true; msg = ": ddqc max is not feasible.";
             end
         end
     else % No constraint provided
-        argCheck = true; msg = ": no constraint provided."
+        argCheck = true; msg = ": no constraint provided.";
     end
     % Trajectory generation
     if ~argCheck % Trajectory is feasible

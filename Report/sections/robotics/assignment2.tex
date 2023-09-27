@@ -135,6 +135,22 @@ If the above is $\leq$ then:
 \end{minipage}
 \end{figure}
 
+\newpage
+
+\begin{figure}[H]
+\centering
+\includegraphics[keepaspectratio,width=\textwidth]{trap_12}
+\caption{$q_i=5,q_f=-5, \dot q_i=-3, \dot q_f=2, \dot q_{max}=4,\ddot q_{max}=3$}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[keepaspectratio,width=\textwidth]{trap_13}
+\caption{$q_i=5,q_f=0, \dot q_i=0.5, \dot q_f=1, \ddot q_{max}=2$}
+\end{figure}
+
+\newpage
+
 To generate a multipoint trajectory we simply repeat the computation for each consecutive point pair. To improve the resulting velocity and acceleration profiles we can apply an heuristic to assign velocities to each waypoint, so that a less jagged profile is obtained:
 
 \begin{align*}
@@ -146,7 +162,7 @@ sign(\Delta Q_k)\dot q_{max}& \text{if }sign(\Delta Q_k)= sign(\Delta Q_{k+1})\\
 \dot q(t_f)&=\dot q_f
 \end{align*}
 
-\begin{figure}
+\begin{figure}[H]
 \begin{minipage}{0.5\textwidth}
 \centering
 \includegraphics[keepaspectratio,width=\textwidth]{trap_10}
