@@ -16,7 +16,7 @@ addpath(genpath('../data/'));
 
 %% LOAD AND DISPLAY IMAGE 
 % Choose which image
-imNo = 1;
+imNo = 2;
 rgb = imread(['data/assignment5/' num2str(imNo) '_rgb.jpg']);
 depth = imread(['data/assignment5/' num2str(imNo) '_depth.png']);
 figure(1); imshowpair(rgb,depth,'montage'); title('Original vs depth image');
@@ -168,24 +168,19 @@ axis equal; ax = gca; ax.Clipping = 'off';
 
 %% CORNER DETECTION
 intersectingLines = [];
-if N == 4
-    for i = 1:4
-        for j = 1:4
-            if j ~= i
-                a = angleBetweenLines(linesM(:,i),linesM(:,j));
-                if (N == 4 && abs(abs(a) - 90) < 10) || ...
-                   (N == 8 && (abs(abs(a) - 45) < 10 || abs(abs(a) - 135) < 10))
-                    intersectingLines = [intersectingLines; i j];
-                end
+for i = 1:N
+    for j = 1:N
+        if j ~= i
+            a = angleBetweenLines(linesM(:,i),linesM(:,j));
+            if (N == 4 && abs(abs(a) - 90) < 10) || ...
+               (N == 8 && (abs(abs(a) - 45) < 10 || abs(abs(a) - 135) < 10))
+                intersectingLines = [intersectingLines; i j];
             end
         end
-    end   
-    intersectingLines = unique(sort(intersectingLines,2),'rows');
-else
-    % A way to distinguish between the octagon vertices and the other line
-    % intersections would be nice
-    intersectingLines = [1,6;1,7;2,5;2,8;3,5;3,6;4,7;4,8];
-end
+    end
+end   
+intersectingLines = unique(sort(intersectingLines,2),'rows');
+
 corners = [];
 for i = 1:size(intersectingLines,1)
     q1 = linesQ(:,intersectingLines(i,1));
@@ -194,6 +189,14 @@ for i = 1:size(intersectingLines,1)
     m2 = linesM(:,intersectingLines(i,2));
     corners = [corners; lineIntersection(q1,m1,q2,m2)'];
 end
+
+% Remove the detected corners that are too far away to be an octagon vertex
+if N == 8
+    corners = [corners sqrt((corners(:,1)-c(1)).^2 + (corners(:,2)-c(2)).^2 +  (corners(:,3)-c(3)).^2)];
+    corners = sortrows(corners, 4);
+    corners = corners(1:8,1:3);
+end
+
 centroid = mean(corners,1);
 hold on;
 scatter3(corners(:,1),corners(:,2),corners(:,3),35,'filled','MarkerEdgeColor','r','MarkerFaceColor','r');
